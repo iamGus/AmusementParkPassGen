@@ -34,25 +34,30 @@ enum PeopleAccess: String {
     case foodservices
     case rideservices
     case maintenance
-    case manager
+    case manager = "Manager Pass"
 }
 
-enum AreaAccess {
+enum AreaAccess: String {
     case amusement
-    case kitchen
+    case kitchen = "Kitchen"
     case ridecontrol
     case maintenance
     case office
 }
 
-enum RideAccess {
-    case allrides
-    case skipAllLines
+enum RideAccess: String {
+    case allrides = "All Rides"
+    case skipAllLines = "Can Skip All Lines"
 }
 
 enum InvalidAgeDataError: Error {
     case invalidAgeData
     case ageNotInAllowedRange
+}
+
+enum DiscountType {
+    case food
+    case merchandise
 }
 
 enum PersonalInfo {
@@ -86,7 +91,7 @@ struct GetAge {
 
 struct DiscountAccess {
     enum DiscountFood: String {
-        case none = ""
+        case none = "No Food Discount"
         case ten = "10% Food Discount"
         case fifteen = "15% Food Disount"
         case twenty = "20% Food Discount"
@@ -94,7 +99,7 @@ struct DiscountAccess {
     }
     
     enum DiscountMerchendise: String {
-        case none = ""
+        case none = "No Merch Discount"
         case twenty = "20% Merch Discount"
         case twentyfive = "25% Merch Discount"
     }
@@ -106,6 +111,7 @@ struct DiscountAccess {
 struct NameAddress {
     let firstName: String
     let lastName: String
+    var fullName: String { return "\(firstName) \(lastName)" }
     let streetAddress: String
     let city: String
     let state: String
@@ -119,6 +125,44 @@ class People: PeopleType {
     var rideAccess: [RideAccess] = [.allrides]
     var personalInfo: [PersonalInfo] = [.none]
     var discountAccess: DiscountAccess = DiscountAccess(food: .none, merchendise: .none)
+    
+    func isUserAllowedArea(in area: AreaAccess) -> (bool: Bool, description: String) {
+        for eachArea in areaAccess {
+            if eachArea == area {
+                return (true, "\(area.rawValue) access allowd")
+            }
+        }
+        return (false, "\(area.rawValue) access not allowed")
+    }
+    
+    //I have got some DRY going on here!
+    func isUserAllowedRide(in area: RideAccess) -> (bool: Bool, description: String) {
+        for eachArea in rideAccess {
+            if eachArea == area {
+                return (true, "\(area.rawValue) access allowd")
+            }
+        }
+        return (false, "\(area.rawValue) access not allowed")
+    }
+    
+    func isUserAllowedDiscount(of discount: DiscountType) -> (bool: Bool, description: String) {
+        //if wanting to know about food discount
+        if discount == .food {
+            //if there is a discount set for food
+            if discountAccess.food != .none {
+                return (true, "\(discountAccess.food.rawValue)")
+            }
+            //otherwise if no food discount
+            return (false, "\(discountAccess.food.rawValue)")
+        }
+        //input must have been .merchendise so check if there is a discount for merch
+        if discountAccess.merchendise != .none {
+            return (true, "\(discountAccess.merchendise.rawValue)")
+        }
+        //if no merch discount
+        return (false, "\(discountAccess.merchendise.rawValue)")
+    }
+    
 }
 
 class Guest: People {
