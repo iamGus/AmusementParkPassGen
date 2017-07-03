@@ -55,6 +55,10 @@ enum InvalidAgeDataError: Error {
     case ageNotInAllowedRange
 }
 
+enum InvalidNameAddressError: Error {
+    case invalidDetails(errorDetails: String)
+}
+
 enum DiscountType {
     case food
     case merchandise
@@ -116,6 +120,40 @@ struct NameAddress {
     let city: String
     let state: String
     let zipCode: String
+    
+    init(firstName: String? = nil, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?) throws {
+        
+        guard let firstNameUnwrapped = firstName, firstNameUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "First Name")
+        }
+        
+        guard let lastNameUnwrapped = lastName, lastNameUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Last Name")
+        }
+        
+        guard let streetAddressUnwrapped = streetAddress, streetAddressUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Street Address")
+        }
+        
+        guard let cityUnwrapped = city, cityUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "City")
+        }
+        
+        guard let stateUnwrapped = state, stateUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "State")
+        }
+        
+        guard let zipCodeUnwrapped = zipCode, zipCodeUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "ZipCode")
+        }
+        
+        self.firstName = firstNameUnwrapped
+        self.lastName = lastNameUnwrapped
+        self.streetAddress = streetAddressUnwrapped
+        self.city = cityUnwrapped
+        self.state = stateUnwrapped
+        self.zipCode = zipCodeUnwrapped
+    }
     
 }
 
