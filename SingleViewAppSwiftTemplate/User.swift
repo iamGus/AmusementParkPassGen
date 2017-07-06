@@ -27,26 +27,26 @@ protocol EmployeeType {
 }
 
 enum PeopleAccess: String {
-    case none
-    case classicguest
-    case vipguest
+    case none = "Error no user seelcted"
+    case classicguest = "Classic Guest Pass"
+    case vipguest = "VIP Guest Pass"
     case freechildguest = "Child Guest Pass"
-    case foodservices
-    case rideservices
-    case maintenance
+    case foodservices = "Employee Food Services Pass"
+    case rideservices = "Employee Ride Services Pass"
+    case maintenance = "Employee Maintenance Pass"
     case manager = "Manager Pass"
 }
 
 enum AreaAccess: String {
-    case amusement
+    case amusement = "Amusement Areas"
     case kitchen = "Kitchen"
-    case ridecontrol
-    case maintenance
-    case office
+    case ridecontrol = "Ride Control"
+    case maintenance = "Maintenance"
+    case office = "Office"
 }
 
 enum RideAccess: String {
-    case allrides = "All Rides"
+    case allrides = "Access All Rides"
     case skipAllLines = "Can Skip All Lines"
 }
 
@@ -56,7 +56,7 @@ enum InvalidAgeDataError: Error {
 }
 
 enum InvalidNameAddressError: Error {
-    case invalidDetails(errorDetails: String)
+    case invalidDetails(errorDetails: String, user: PeopleAccess)
 }
 
 enum DiscountType {
@@ -120,31 +120,34 @@ struct NameAddress {
     let city: String
     let state: String
     let zipCode: String
+    let peopleType: PeopleAccess
     
-    init(firstName: String? = nil, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?) throws {
+    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, peopleType: PeopleAccess) throws {
+        
+        self.peopleType = peopleType
         
         guard let firstNameUnwrapped = firstName, firstNameUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "First Name")
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "First Name", user: self.peopleType)
         }
         
         guard let lastNameUnwrapped = lastName, lastNameUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "Last Name")
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Last Name", user: self.peopleType)
         }
         
         guard let streetAddressUnwrapped = streetAddress, streetAddressUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "Street Address")
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Street Address", user: self.peopleType)
         }
         
         guard let cityUnwrapped = city, cityUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "City")
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "City", user: self.peopleType)
         }
         
         guard let stateUnwrapped = state, stateUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "State")
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "State", user: self.peopleType)
         }
         
         guard let zipCodeUnwrapped = zipCode, zipCodeUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "ZipCode")
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "ZipCode", user: self.peopleType)
         }
         
         self.firstName = firstNameUnwrapped
