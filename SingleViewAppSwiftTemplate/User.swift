@@ -52,7 +52,8 @@ enum RideAccess: String {
 
 enum InvalidAgeDataError: Error {
     case invalidAgeData
-    case ageNotInAllowedRange
+    case ageNotInAllowedRange(currentAge: Int)
+    case missingBirthdayData
 }
 
 enum InvalidNameAddressError: Error {
@@ -69,19 +70,38 @@ enum PersonalInfo {
     case age
     case nameaddress
     
-    static func calcAge(day: Int, month: Int, year: Int) -> Int {
-        let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day))!
-        return Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year!
-    }
     
-}
-
-struct GetAge {
-    let day: Int
-    let month: Int
-    let year: Int
-    
-    func calcAge(day: Int, month: Int, year: Int) throws -> Int {
+    func calcAge(birthDate: String?) throws -> Int {
+        //chech there is data in string input
+        guard let date = birthDate, date != "" else {
+            throw InvalidAgeDataError.missingBirthdayData
+        }
+        // check in right string format
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "dd/mm/yyyy"
+        //if not correctformat throw error
+        guard (dateFormatterGet.date(from: date) != nil) else {
+            print(InvalidAgeDataError.invalidAgeData)
+            throw InvalidAgeDataError.invalidAgeData
+        }
+        
+        // Convert from string to date components
+        let dateArr = date.components(separatedBy: "/")
+        var day = 0
+        var month = 0
+        var year = 0
+        
+        if let stringDay = Int(dateArr[0]) {
+            day = stringDay
+        }
+        if let stringMonth = Int(dateArr[1]) {
+            month = stringMonth
+        }
+        
+        if let stringYear = Int(dateArr[2]) {
+            year = stringYear
+        }
+        
         if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
             if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
                 return returnYear
@@ -91,6 +111,71 @@ struct GetAge {
         throw InvalidAgeDataError.invalidAgeData
     }
 }
+
+
+struct GetAge {
+    let day: Int?
+    let month: Int?
+    let year: Int?
+    
+    func calcAge(birthDay: Int?, birthMonth: Int?, birthYear: Int?) throws -> Int {
+        guard let day = birthDay, let month = birthMonth, let year = birthYear else {
+            throw InvalidAgeDataError.missingBirthdayData
+        }
+        if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
+            if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
+                return returnYear
+            }
+            throw InvalidAgeDataError.invalidAgeData
+        }
+        throw InvalidAgeDataError.invalidAgeData
+    }
+}
+
+struct GetAge2 {
+    
+    
+    
+    func calcAge(birthDate: String?) throws -> Int {
+        //chech there is data in string input
+        guard let date = birthDate, date != "" else {
+            throw InvalidAgeDataError.missingBirthdayData
+        }
+        // check in right string format
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "dd/mm/yyyy"
+        //if not correctformat throw error
+        guard (dateFormatterGet.date(from: date) != nil) else {
+            throw InvalidAgeDataError.invalidAgeData
+        }
+        
+        // Convert from string to date components
+        let dateArr = date.components(separatedBy: "/")
+        var day = 0
+        var month = 0
+        var year = 0
+        
+        if let stringDay = Int(dateArr[0]) {
+            day = stringDay
+        }
+        if let stringMonth = Int(dateArr[1]) {
+            month = stringMonth
+        }
+        
+        if let stringYear = Int(dateArr[2]) {
+            year = stringYear
+        }
+        
+        if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
+            if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
+                return returnYear
+            }
+            throw InvalidAgeDataError.invalidAgeData
+        }
+        throw InvalidAgeDataError.invalidAgeData
+    }
+}
+
 
 
 struct DiscountAccess {
@@ -173,7 +258,7 @@ class People: PeopleType {
                 return (true, "\(area.rawValue) access allowd")
             }
         }
-        return (false, "\(area.rawValue) access not allowed")
+        return (false, "ALERT: \(area.rawValue) access not allowed")
     }
     
     //I have got some DRY going on here!
@@ -183,7 +268,7 @@ class People: PeopleType {
                 return (true, "\(area.rawValue) access allowd")
             }
         }
-        return (false, "\(area.rawValue) access not allowed")
+        return (false, "ALERT: \(area.rawValue) access not allowed")
     }
     
     func isUserAllowedDiscount(of discount: DiscountType) -> (bool: Bool, description: String) {
@@ -236,10 +321,10 @@ class Child: Guest {
     
     var age: Int
     
-    init(date: GetAge) throws {
-        self.age = try date.calcAge(day: date.day, month: date.month, year: date.year)
+    init(dateOfBirth: String?) throws {
+        self.age = try GetAge2().calcAge(birthDate: dateOfBirth)
         if age > 4 {
-            throw InvalidAgeDataError.ageNotInAllowedRange
+            throw InvalidAgeDataError.ageNotInAllowedRange(currentAge: age)
         }
         super.init()
         self.peopletype = .freechildguest
