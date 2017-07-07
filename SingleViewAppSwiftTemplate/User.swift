@@ -9,11 +9,14 @@
 import Foundation
 
 protocol PeopleType {
-    var peopletype: PeopleAccess { get }
+    var entrantType: EntrantType { get }
     var areaAccess: [AreaAccess] { get }
     var rideAccess: [RideAccess] { get }
     var personalInfo: [PersonalInfo] { get }
     var discountAccess: DiscountAccess { get }
+    func isUserAllowedInArea(_ area: AreaAccess) -> (bool: Bool, description: String)
+    func isUserAllowedInRide(_ ride: RideAccess) -> (bool: Bool, description: String)
+    func isUserAllowedDiscount(of discount: DiscountType) -> (bool: Bool, description: String)
 }
 
 protocol ChildType {
@@ -23,11 +26,11 @@ protocol ChildType {
 
 protocol EmployeeType {
     var nameAddress: NameAddress { get }
-    init(nameAddress: NameAddress)
+    init(_ nameAddress: NameAddress)
 }
 
-enum PeopleAccess: String {
-    case none = "Error no user seelcted"
+enum EntrantType: String {
+    case none = "Error no user selected"
     case classicguest = "Classic Guest Pass"
     case vipguest = "VIP Guest Pass"
     case freechildguest = "Child Guest Pass"
@@ -47,7 +50,7 @@ enum AreaAccess: String {
 
 enum RideAccess: String {
     case allrides = "Access All Rides"
-    case skipAllLines = "Can Skip All Lines"
+    case skipAllLines = "Skip All Lines"
 }
 
 enum InvalidAgeDataError: Error {
@@ -57,7 +60,7 @@ enum InvalidAgeDataError: Error {
 }
 
 enum InvalidNameAddressError: Error {
-    case invalidDetails(errorDetails: String, user: PeopleAccess)
+    case invalidDetails(errorDetails: String, user: EntrantType)
 }
 
 enum DiscountType {
@@ -69,120 +72,14 @@ enum PersonalInfo {
     case none
     case age
     case nameaddress
-    
-    
-    func calcAge(birthDate: String?) throws -> Int {
-        //chech there is data in string input
-        guard let date = birthDate, date != "" else {
-            throw InvalidAgeDataError.missingBirthdayData
-        }
-        // check in right string format
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "dd/mm/yyyy"
-        //if not correctformat throw error
-        guard (dateFormatterGet.date(from: date) != nil) else {
-            print(InvalidAgeDataError.invalidAgeData)
-            throw InvalidAgeDataError.invalidAgeData
-        }
-        
-        // Convert from string to date components
-        let dateArr = date.components(separatedBy: "/")
-        var day = 0
-        var month = 0
-        var year = 0
-        
-        if let stringDay = Int(dateArr[0]) {
-            day = stringDay
-        }
-        if let stringMonth = Int(dateArr[1]) {
-            month = stringMonth
-        }
-        
-        if let stringYear = Int(dateArr[2]) {
-            year = stringYear
-        }
-        
-        if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
-            if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
-                return returnYear
-            }
-            throw InvalidAgeDataError.invalidAgeData
-        }
-        throw InvalidAgeDataError.invalidAgeData
-    }
 }
-
-
-struct GetAge {
-    let day: Int?
-    let month: Int?
-    let year: Int?
-    
-    func calcAge(birthDay: Int?, birthMonth: Int?, birthYear: Int?) throws -> Int {
-        guard let day = birthDay, let month = birthMonth, let year = birthYear else {
-            throw InvalidAgeDataError.missingBirthdayData
-        }
-        if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
-            if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
-                return returnYear
-            }
-            throw InvalidAgeDataError.invalidAgeData
-        }
-        throw InvalidAgeDataError.invalidAgeData
-    }
-}
-
-struct GetAge2 {
-    
-    
-    
-    func calcAge(birthDate: String?) throws -> Int {
-        //chech there is data in string input
-        guard let date = birthDate, date != "" else {
-            throw InvalidAgeDataError.missingBirthdayData
-        }
-        // check in right string format
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "dd/mm/yyyy"
-        //if not correctformat throw error
-        guard (dateFormatterGet.date(from: date) != nil) else {
-            throw InvalidAgeDataError.invalidAgeData
-        }
-        
-        // Convert from string to date components
-        let dateArr = date.components(separatedBy: "/")
-        var day = 0
-        var month = 0
-        var year = 0
-        
-        if let stringDay = Int(dateArr[0]) {
-            day = stringDay
-        }
-        if let stringMonth = Int(dateArr[1]) {
-            month = stringMonth
-        }
-        
-        if let stringYear = Int(dateArr[2]) {
-            year = stringYear
-        }
-        
-        if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
-            if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
-                return returnYear
-            }
-            throw InvalidAgeDataError.invalidAgeData
-        }
-        throw InvalidAgeDataError.invalidAgeData
-    }
-}
-
 
 
 struct DiscountAccess {
     enum DiscountFood: String {
         case none = "No Food Discount"
         case ten = "10% Food Discount"
-        case fifteen = "15% Food Disount"
+        case fifteen = "15% Food Discount"
         case twenty = "20% Food Discount"
         case twentyfive = "25% Food Discount"
     }
@@ -197,6 +94,7 @@ struct DiscountAccess {
     let merchendise: DiscountMerchendise
 }
 
+//Store name and address details
 struct NameAddress {
     let firstName: String
     let lastName: String
@@ -205,34 +103,36 @@ struct NameAddress {
     let city: String
     let state: String
     let zipCode: String
-    let peopleType: PeopleAccess
+    let entrantType: EntrantType
     
-    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, peopleType: PeopleAccess) throws {
+    init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, entrantType: EntrantType) throws {
         
-        self.peopleType = peopleType
+        self.entrantType = entrantType
+        
+        // Checks to make sure no blank details given
         
         guard let firstNameUnwrapped = firstName, firstNameUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "First Name", user: self.peopleType)
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "First Name", user: self.entrantType)
         }
         
         guard let lastNameUnwrapped = lastName, lastNameUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "Last Name", user: self.peopleType)
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Last Name", user: self.entrantType)
         }
         
         guard let streetAddressUnwrapped = streetAddress, streetAddressUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "Street Address", user: self.peopleType)
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Street Address", user: self.entrantType)
         }
         
         guard let cityUnwrapped = city, cityUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "City", user: self.peopleType)
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "City", user: self.entrantType)
         }
         
         guard let stateUnwrapped = state, stateUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "State", user: self.peopleType)
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "State", user: self.entrantType)
         }
         
         guard let zipCodeUnwrapped = zipCode, zipCodeUnwrapped != "" else {
-            throw InvalidNameAddressError.invalidDetails(errorDetails: "ZipCode", user: self.peopleType)
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "ZipCode", user: self.entrantType)
         }
         
         self.firstName = firstNameUnwrapped
@@ -245,32 +145,38 @@ struct NameAddress {
     
 }
 
+// Super Class for all entrance types
 class People: PeopleType {
-    var peopletype: PeopleAccess = .none
+    var entrantType: EntrantType = .none
     var areaAccess: [AreaAccess] = [.amusement]
     var rideAccess: [RideAccess] = [.allrides]
     var personalInfo: [PersonalInfo] = [.none]
     var discountAccess: DiscountAccess = DiscountAccess(food: .none, merchendise: .none)
     
-    func isUserAllowedArea(in area: AreaAccess) -> (bool: Bool, description: String) {
+    func isUserAllowedInArea(_ area: AreaAccess) -> (bool: Bool, description: String) {
         for eachArea in areaAccess {
+            //If area provided is in that users class then allow
             if eachArea == area {
-                return (true, "\(area.rawValue) access allowd")
+                return (true, "\(area.rawValue) access allowed")
             }
         }
+        //Otherwise user not allowed in area
         return (false, "ALERT: \(area.rawValue) access not allowed")
     }
     
-    //I have got some DRY going on here!
-    func isUserAllowedRide(in area: RideAccess) -> (bool: Bool, description: String) {
+    
+    func isUserAllowedInRide(_ ride: RideAccess) -> (bool: Bool, description: String) {
         for eachArea in rideAccess {
-            if eachArea == area {
-                return (true, "\(area.rawValue) access allowd")
+            //If ride access provided is also in that users class then allow
+            if eachArea == ride {
+                return (true, "\(ride.rawValue) access allowed")
             }
         }
-        return (false, "ALERT: \(area.rawValue) access not allowed")
+        //Otherwise user not allowed in Ride Access area
+        return (false, "ALERT: \(ride.rawValue) access not allowed")
     }
     
+    // To work out if user is allowed discount and of how much
     func isUserAllowedDiscount(of discount: DiscountType) -> (bool: Bool, description: String) {
         //if wanting to know about food discount
         if discount == .food {
@@ -291,6 +197,7 @@ class People: PeopleType {
     
 }
 
+// class that all guest sub classes will be under
 class Guest: People {
     
     
@@ -300,7 +207,7 @@ class ClassicGuest: Guest {
     
     override init() {
         super.init()
-        self.peopletype = .classicguest
+        self.entrantType = .classicguest
     }
     
 }
@@ -309,7 +216,7 @@ class VIPGuest: Guest {
     
     override init() {
         super.init()
-        self.peopletype = .vipguest
+        self.entrantType = .vipguest
         self.rideAccess = [.skipAllLines, .allrides]
         self.discountAccess = DiscountAccess(food: .ten, merchendise: .twenty)
     }
@@ -322,22 +229,22 @@ class Child: Guest {
     var age: Int
     
     init(dateOfBirth: String?) throws {
-        self.age = try GetAge2().calcAge(birthDate: dateOfBirth)
+        self.age = try GetAge().calcAge(birthDate: dateOfBirth)
+        //If age above 4 then throw age too high error
         if age > 4 {
             throw InvalidAgeDataError.ageNotInAllowedRange(currentAge: age)
         }
         super.init()
-        self.peopletype = .freechildguest
-        self.rideAccess = [.allrides, .skipAllLines]
+        self.entrantType = .freechildguest
         self.personalInfo = [.age]
     }
     
 }
-
+// Class that all employee sub classes wil be under
 class Employee: People, EmployeeType {
     var nameAddress: NameAddress
     
-    required init(nameAddress: NameAddress) {
+    required init(_ nameAddress: NameAddress) {
         self.nameAddress = nameAddress
         super.init()
     }
@@ -345,9 +252,9 @@ class Employee: People, EmployeeType {
 
 class FoodServices: Employee {
     
-    required init(nameAddress: NameAddress) {
-        super.init(nameAddress: nameAddress)
-        self.peopletype = .foodservices
+    required init(_ nameAddress: NameAddress) {
+        super.init(nameAddress)
+        self.entrantType = .foodservices
         self.areaAccess = [.amusement, .kitchen]
         self.discountAccess = DiscountAccess(food: .fifteen, merchendise: .twentyfive)
     }
@@ -355,9 +262,9 @@ class FoodServices: Employee {
 
 class RideServices: Employee {
     
-    required init(nameAddress: NameAddress) {
-        super.init(nameAddress: nameAddress)
-        self.peopletype = .rideservices
+    required init(_ nameAddress: NameAddress) {
+        super.init(nameAddress)
+        self.entrantType = .rideservices
         self.areaAccess = [.amusement, .ridecontrol]
         self.discountAccess = DiscountAccess(food: .fifteen, merchendise: .twentyfive)
     }
@@ -365,9 +272,9 @@ class RideServices: Employee {
 
 class Maintenance: Employee {
     
-    required init(nameAddress: NameAddress) {
-        super.init(nameAddress: nameAddress)
-        self.peopletype = .maintenance
+    required init(_ nameAddress: NameAddress) {
+        super.init(nameAddress)
+        self.entrantType = .maintenance
         self.areaAccess = [.amusement, .kitchen, .ridecontrol, .maintenance]
         self.discountAccess = DiscountAccess(food: .fifteen, merchendise: .twentyfive)
     }
@@ -375,9 +282,9 @@ class Maintenance: Employee {
 
 class Manager: Employee {
     
-    required init(nameAddress: NameAddress) {
-        super.init(nameAddress: nameAddress)
-        self.peopletype = .manager
+    required init(_ nameAddress: NameAddress) {
+        super.init(nameAddress)
+        self.entrantType = .manager
         self.areaAccess = [.amusement, .kitchen, .ridecontrol, .maintenance, .office]
         self.discountAccess = DiscountAccess(food: .twentyfive, merchendise: .twentyfive)
     }

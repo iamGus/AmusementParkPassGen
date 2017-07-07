@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  SingleViewAppSwiftTemplate
 //
-//  Created by Treehouse on 12/8/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Created by Angus Muller on 03/07/2017.
+//  Copyright © 2017 Angus Muller. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // ---------------------------------------------------------
-        // ---- Checking creation of a user and checking errors ----
+        // ---- Checking creation of a user ticket and checking errors ----
         // ---- Uncomment instances below to check error results ---
         // ---------------------------------------------------------
         
@@ -23,30 +23,39 @@ class ViewController: UIViewController {
             //let classicGuest = try ClassicGuest()
             //print(classicGuest)
             
-            // ---- Child with a date of birth of more than five years old
-            // ---- Will get too old error message
-            //let child = try Child(date: GetAge(day: 13, month: 11, year: 2007))
-            
             // ---- Child with missing birthday ----
-            let child = try Child(dateOfBirth: "12/04/2014")
-            print(child.age)
+            //let child = try Child(dateOfBirth: nil)
+            
+            // ---- Child with wrong birthday format ----
+            //let child = try Child(dateOfBirth: "07/October/2015")
+            
+            // ---- Child older than five, bring back too old message ----
+            //let child = try Child(dateOfBirth: "04/03/2011")
+            
+            // ---- Child 3 years old, ticket created, no error ----
+            //let child = try Child(dateOfBirth: "04/03/2014")
+            //print(child.age)
             
             // ---- Food Services employee with no data in First name field.
             // ---- Will inform user no data in First Name field
-            //let foodservices = try FoodServices(nameAddress: NameAddress(firstName: nil, lastName: "Peterson", streetAddress: "High Street", city: "Bath", state: "England", zipCode: "BA8 7TF", peopleType: .foodservices))
+            //let foodservices = try FoodServices(NameAddress(firstName: nil, lastName: "Peterson", streetAddress: "High Street", city: "Bath", state: "England", zipCode: "BA8 7TF", entrantType: .foodservices))
             
             // ---- Manager with "" in Street Address field
             // ---- Will inform user no data in Street Address field
-            //let manager = try Manager(nameAddress: NameAddress(firstName: "Terry", lastName: "Armstrong", streetAddress: "", city: "Glasgow", state: "Scotland", zipCode: "GL3 9UR", peopleType: .manager))
+            //let manager = try Manager(NameAddress(firstName: "Terry", lastName: "Armstrong", streetAddress: "", city: "Glasgow", state: "Scotland", zipCode: "GL3 9UR", entrantType: .manager))
+            
+            // ---- Ride Services with complete correct data, instance created
+            //let rideServices = try RideServices(NameAddress(firstName: "John", lastName: "Potter", streetAddress: "76 Peach Street", city: "Oxford", state: "Oxfordshire", zipCode: "JY8 6FR", entrantType: .rideservices))
+            //print(rideServices.nameAddress.fullName)
             
         } catch InvalidNameAddressError.invalidDetails(errorDetails: let dataField, let user){
             print("Error: The \(dataField) field has no data for \(user.rawValue). Cannot create ticket for \(user.rawValue).")
         } catch InvalidAgeDataError.ageNotInAllowedRange(currentAge: let currentAge) {
             print("Error: Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket. Cannot create ticket.")
         } catch InvalidAgeDataError.missingBirthdayData {
-            print("Error: Missing data in age")
+            print("Error: You have not provided a date of birth")
         } catch InvalidAgeDataError.invalidAgeData {
-            print("Error: invalid age format")
+            print("Error: invalid age format, must be in format dd/mm/yyyy")
         } catch let error {
             fatalError("\(error)")
         }
@@ -54,6 +63,7 @@ class ViewController: UIViewController {
         // ---------------------------------
         // ----- Checking access rights ----
         // ----- Un-comment case to test ---
+        // ---------------------------------
         
         do{
         
@@ -61,22 +71,22 @@ class ViewController: UIViewController {
         // Testing: Can access Amusement Area?, Can access Ride control? Skip Lines? Food discount?
     /*
         let classicGuestAccess = ClassicGuest()
-        let classicGuestAccessArea = classicGuestAccess.isUserAllowedArea(in: .amusement)
-        let classicGuestAccessArea2 = classicGuestAccess.isUserAllowedArea(in: .ridecontrol)
-        let classicGuestAccessRide = classicGuestAccess.isUserAllowedRide(in: .skipAllLines)
+        let classicGuestAccessArea = classicGuestAccess.isUserAllowedInArea(.amusement)
+        let classicGuestAccessArea2 = classicGuestAccess.isUserAllowedInArea(.ridecontrol)
+        let classicGuestAccessRide = classicGuestAccess.isUserAllowedInRide(.skipAllLines)
         let classicGuestAccessDiscount = classicGuestAccess.isUserAllowedDiscount(of: .food)
         
         print("Guest user \n \(classicGuestAccessArea.description) \n \(classicGuestAccessArea2.description) \n \(classicGuestAccessRide.description) \n \(classicGuestAccessDiscount.description) \n")
-        
-    */
+     */
+    
  
         // --- VIP Guest access
         // Testing: Can access Amusement Area?, Can access Office? Skip Lines? Food discount?
     /*
         let VIPGuestAccess = VIPGuest()
-        let VIPGuestAccessArea = VIPGuestAccess.isUserAllowedArea(in: .amusement)
-        let VIPGuestAccessArea2 = VIPGuestAccess.isUserAllowedArea(in: .office)
-        let VIPGuestAccessRide = VIPGuestAccess.isUserAllowedRide(in: .skipAllLines)
+        let VIPGuestAccessArea = VIPGuestAccess.isUserAllowedInArea(.amusement)
+        let VIPGuestAccessArea2 = VIPGuestAccess.isUserAllowedInArea(.office)
+        let VIPGuestAccessRide = VIPGuestAccess.isUserAllowedInRide(.skipAllLines)
         let VIPGuestAccessDiscount = VIPGuestAccess.isUserAllowedDiscount(of: .food)
         
         print("VIP user \n \(VIPGuestAccessArea.description) \n \(VIPGuestAccessArea2.description) \n \(VIPGuestAccessRide.description) \n \(VIPGuestAccessDiscount.description) \n")
@@ -86,10 +96,10 @@ class ViewController: UIViewController {
         // --- Free Child Guest access
         // Testing: Can access Amusement Area?, Can access Kitchen? Skip Lines? Merchandise discount?
     /*
-        let childAccess = try Child(date: GetAge(day: 02, month: 03, year: 2015))
-        let childAccessArea = childAccess.isUserAllowedArea(in: .amusement)
-        let childAccessArea2 = childAccess.isUserAllowedArea(in: .kitchen)
-        let childAccessRide = childAccess.isUserAllowedRide(in: .skipAllLines)
+        let childAccess = try Child(dateOfBirth: "21/01/2015")
+        let childAccessArea = childAccess.isUserAllowedInArea(.amusement)
+        let childAccessArea2 = childAccess.isUserAllowedInArea(.kitchen)
+        let childAccessRide = childAccess.isUserAllowedInRide(.skipAllLines)
         let childAccessDiscount = childAccess.isUserAllowedDiscount(of: .merchandise)
         
         print("Child Guest user \n \(childAccessArea.description) \n \(childAccessArea2.description) \n \(childAccessRide.description) \n \(childAccessDiscount.description) \n")
@@ -97,11 +107,11 @@ class ViewController: UIViewController {
         // --- Food Service Employee access
         // Testing: Can access Amusement Area?, Can access Kitchen? Can access Maintenance Area?, Skip all lines?, Merchandise discount?
     /*
-        let foodServicesAccess = try FoodServices(nameAddress: NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meddow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", peopleType: .foodservices))
-        let foodServicesAccessArea = foodServicesAccess.isUserAllowedArea(in: .amusement)
-        let foodServicesAccessArea2 = foodServicesAccess.isUserAllowedArea(in: .kitchen)
-        let foodServicesAccessArea3 = foodServicesAccess.isUserAllowedArea(in: .maintenance)
-        let foodServicesAccessRide = foodServicesAccess.isUserAllowedRide(in: .skipAllLines)
+        let foodServicesAccess = try FoodServices(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .foodservices))
+        let foodServicesAccessArea = foodServicesAccess.isUserAllowedInArea(.amusement)
+        let foodServicesAccessArea2 = foodServicesAccess.isUserAllowedInArea(.kitchen)
+        let foodServicesAccessArea3 = foodServicesAccess.isUserAllowedInArea(.maintenance)
+        let foodServicesAccessRide = foodServicesAccess.isUserAllowedInRide(.skipAllLines)
         let foodServicesAccessDiscount = foodServicesAccess.isUserAllowedDiscount(of: .merchandise)
         
         print("Food Services Employee user \n \(foodServicesAccessArea.description) \n \(foodServicesAccessArea2.description) \n \(foodServicesAccessArea3.description) \n \(foodServicesAccessRide.description) \n \(foodServicesAccessDiscount.description) \n")
@@ -109,11 +119,11 @@ class ViewController: UIViewController {
         // --- Ride Service Employee access
         // Testing: Can access Amusement Area?, Can access Ride Control? Can access Office Area?, Skip lines? food discount?
     /*
-        let rideServicesAccess = try RideServices(nameAddress: NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meddow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", peopleType: .rideservices))
-        let rideServicesAccessArea = rideServicesAccess.isUserAllowedArea(in: .amusement)
-        let rideServicesAccessArea2 = rideServicesAccess.isUserAllowedArea(in: .ridecontrol)
-        let rideServicesAccessArea3 = rideServicesAccess.isUserAllowedArea(in: .office)
-        let rideServicesAccessRide = rideServicesAccess.isUserAllowedRide(in: .skipAllLines)
+        let rideServicesAccess = try RideServices(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .rideservices))
+        let rideServicesAccessArea = rideServicesAccess.isUserAllowedInArea(.amusement)
+        let rideServicesAccessArea2 = rideServicesAccess.isUserAllowedInArea(.ridecontrol)
+        let rideServicesAccessArea3 = rideServicesAccess.isUserAllowedInArea(.office)
+        let rideServicesAccessRide = rideServicesAccess.isUserAllowedInRide(.skipAllLines)
         let rideServicesAccessDiscount = rideServicesAccess.isUserAllowedDiscount(of: .food)
         
         print("Ride Services Employee user \n \(rideServicesAccessArea.description) \n \(rideServicesAccessArea2.description) \n \(rideServicesAccessArea3.description) \n \(rideServicesAccessRide.description) \n \(rideServicesAccessDiscount.description) \n")
@@ -121,12 +131,12 @@ class ViewController: UIViewController {
         // --- Maintenance Employee access
         // Testing: Can access Amusement Area?, Can access Maintenance? Can access Office Area?, Can access Ride Control? Skip lines? Merchandise discount?
     /*
-        let maintenanceAccess = try Maintenance(nameAddress: NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meddow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", peopleType: .maintenance))
-        let maintenanceAccessArea = maintenanceAccess.isUserAllowedArea(in: .amusement)
-        let maintenanceAccessArea2 = maintenanceAccess.isUserAllowedArea(in: .maintenance)
-        let maintenanceAccessArea3 = maintenanceAccess.isUserAllowedArea(in: .office)
-        let maintenanceAccessArea4 = maintenanceAccess.isUserAllowedArea(in: .ridecontrol)
-        let maintenanceAccessRide = maintenanceAccess.isUserAllowedRide(in: .skipAllLines)
+        let maintenanceAccess = try Maintenance(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .maintenance))
+        let maintenanceAccessArea = maintenanceAccess.isUserAllowedInArea(.amusement)
+        let maintenanceAccessArea2 = maintenanceAccess.isUserAllowedInArea(.maintenance)
+        let maintenanceAccessArea3 = maintenanceAccess.isUserAllowedInArea(.office)
+        let maintenanceAccessArea4 = maintenanceAccess.isUserAllowedInArea(.ridecontrol)
+        let maintenanceAccessRide = maintenanceAccess.isUserAllowedInRide(.skipAllLines)
         let maintenanceAccessDiscount = maintenanceAccess.isUserAllowedDiscount(of: .merchandise)
         
         print("Maintenance Employee user \n \(maintenanceAccessArea.description) \n \(maintenanceAccessArea2.description) \n \(maintenanceAccessArea3.description) \n \(maintenanceAccessArea4.description) \n \(maintenanceAccessRide.description) \n \(maintenanceAccessDiscount.description) \n")
@@ -134,24 +144,26 @@ class ViewController: UIViewController {
             
             
         // --- Manager Employee access
-        // Testing: Can access Amusement Area?, Can access Maintenance? Can access Office Area?, Can access Ridr Control? Skip lines? Merchandise discount?
+        // Testing: Can access Amusement Area?, Can access Maintenance? Can access Office Area?, Can access Ride Control? Skip lines? Merchandise discount?
     /*
-        let managerAccess = try Manager(nameAddress: NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meddow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", peopleType: .maintenance))
-        let managerAccessArea = managerAccess.isUserAllowedArea(in: .amusement)
-        let managerAccessArea2 = managerAccess.isUserAllowedArea(in: .maintenance)
-        let managerAccessArea3 = managerAccess.isUserAllowedArea(in: .office)
-        let managerAccessArea4 = managerAccess.isUserAllowedArea(in: .ridecontrol)
-        let managerAccessRide = managerAccess.isUserAllowedRide(in: .skipAllLines)
+        let managerAccess = try Manager(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .maintenance))
+        let managerAccessArea = managerAccess.isUserAllowedInArea(.amusement)
+        let managerAccessArea2 = managerAccess.isUserAllowedInArea(.maintenance)
+        let managerAccessArea3 = managerAccess.isUserAllowedInArea(.office)
+        let managerAccessArea4 = managerAccess.isUserAllowedInArea(.ridecontrol)
+        let managerAccessRide = managerAccess.isUserAllowedInRide(.skipAllLines)
         let managerAccessDiscount = managerAccess.isUserAllowedDiscount(of: .merchandise)
         
         print("Manager Employee user \n \(managerAccessArea.description) \n \(managerAccessArea2.description) \n \(managerAccessArea3.description) \n \(managerAccessArea4.description) \n \(managerAccessRide.description) \n \(managerAccessDiscount.description) \n")
     */
         } catch InvalidNameAddressError.invalidDetails(errorDetails: let dataField, let user){
-            print("Error: The \(dataField) field has invalid data for \(user.rawValue)")
+            print("Error: The \(dataField) field has no data for \(user.rawValue). Cannot create ticket for \(user.rawValue).")
         } catch InvalidAgeDataError.ageNotInAllowedRange(currentAge: let currentAge) {
-            print("Error: Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket")
+            print("Error: Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket. Cannot create ticket.")
+        } catch InvalidAgeDataError.missingBirthdayData {
+            print("Error: Missing data in age")
         } catch InvalidAgeDataError.invalidAgeData {
-            print("Error: invalid age format")
+            print("Error: invalid age format, must be in format dd/mm/yyyy")
         } catch let error {
             fatalError("\(error)")
         }
