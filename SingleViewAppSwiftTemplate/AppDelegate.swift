@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  SingleViewAppSwiftTemplate
 //
-//  Created by Treehouse on 12/8/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Created by Angus Muller on 03/07/2017.
+//  Copyright © 2017 Angus Muller. All rights reserved.
 //
 
 import UIKit
