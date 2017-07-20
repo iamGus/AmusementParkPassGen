@@ -51,3 +51,17 @@ class Child: Guest {
     }
     
 }
+
+class SeasonGuest: Guest {
+    
+    var nameAddress: NameAddress
+    
+    required init(_ nameAddress: NameAddress) {
+        self.nameAddress = nameAddress
+        super.init()
+        self.entrantType = .seasonguest
+        self.rideAccess = [.skipAllLines, .allrides]
+        self.discountAccess = DiscountAccess(food: .ten, merchendise: .twenty)
+    }
+    
+}

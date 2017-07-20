@@ -16,47 +16,56 @@ class People: PeopleType {
     var personalInfo: [PersonalInfo] = [.none]
     var discountAccess: DiscountAccess = DiscountAccess(food: .none, merchendise: .none)
     
-    func isUserAllowedInArea(_ area: AreaAccess) -> (bool: Bool, description: String) {
-        for eachArea in areaAccess {
-            //If area provided is in that users class then allow
-            if eachArea == area {
-                return (true, "\(area.rawValue) access allowed")
+    //Check access and discount swipe function
+    func swipe<T: Swipe>(area: T) -> (bool: Bool, description: String) {
+        
+        //If swipe was AreaAccess type
+        if let areaToCheck = area as? AreaAccess {
+            for eachArea in areaAccess {
+                //If area provided is in that users class then allow
+                if eachArea == areaToCheck {
+                    return (true, "\(areaToCheck.rawValue) access allowed")
+                }
             }
+            //Otherwise user not allowed in area
+            return (false, "ALERT: \(areaToCheck.rawValue) access not allowed")
+            
+            //If swipe was RideAccess type
+        } else if let rideToCheck = area as? RideAccess {
+            for eachRide in rideAccess {
+                //If area provided is in that users class then allow
+                if eachRide == rideToCheck {
+                    return (true, "\(rideToCheck.rawValue) access allowed")
+                }
+            }
+            //Otherwise user not allowed in area
+            return (false, "ALERT: \(rideToCheck.rawValue) access not allowed")
+            
+            //If swipe was DiscountType
+        } else if let discountToCheck = area as? DiscountType {
+            //if wanting to know about food discount
+            if discountToCheck == .food {
+                //if there is a discount set for food
+                if discountAccess.food != .none {
+                    return (true, "\(discountAccess.food.rawValue)")
+                }
+                //otherwise if no food discount
+                return (false, "\(discountAccess.food.rawValue)")
+            }
+            //input must have been .merchendise so check if there is a discount for merch
+            if discountAccess.merchendise != .none {
+                return (true, "\(discountAccess.merchendise.rawValue)")
+            }
+            //if no merch discount
+            return (false, "\(discountAccess.merchendise.rawValue)")
         }
-        //Otherwise user not allowed in area
-        return (false, "ALERT: \(area.rawValue) access not allowed")
+        
+        //In case none of above swipe types have invlaid input message but should never be called as protocol only allows Ride, Area to doscount in function parameter
+        return (false, "ALERT: Invalid input")
+        
     }
     
-    
-    func isUserAllowedInRide(_ ride: RideAccess) -> (bool: Bool, description: String) {
-        for eachArea in rideAccess {
-            //If ride access provided is also in that users class then allow
-            if eachArea == ride {
-                return (true, "\(ride.rawValue) access allowed")
-            }
-        }
-        //Otherwise user not allowed in Ride Access area
-        return (false, "ALERT: \(ride.rawValue) access not allowed")
-    }
-    
-    // To work out if user is allowed discount and of how much
-    func isUserAllowedDiscount(of discount: DiscountType) -> (bool: Bool, description: String) {
-        //if wanting to know about food discount
-        if discount == .food {
-            //if there is a discount set for food
-            if discountAccess.food != .none {
-                return (true, "\(discountAccess.food.rawValue)")
-            }
-            //otherwise if no food discount
-            return (false, "\(discountAccess.food.rawValue)")
-        }
-        //input must have been .merchendise so check if there is a discount for merch
-        if discountAccess.merchendise != .none {
-            return (true, "\(discountAccess.merchendise.rawValue)")
-        }
-        //if no merch discount
-        return (false, "\(discountAccess.merchendise.rawValue)")
-    }
+   
     
     // To take a date of birth and return age in Int
     func calcAge(birthDate: String?) throws -> Int {

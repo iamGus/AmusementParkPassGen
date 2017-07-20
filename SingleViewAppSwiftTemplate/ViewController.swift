@@ -106,16 +106,16 @@ class ViewController: UIViewController {
     */
         // --- Food Service Employee access
         // Testing: Can access Amusement Area?, Can access Kitchen? Can access Maintenance Area?, Skip all lines?, Merchandise discount?
-    /*
+    
         let foodServicesAccess = try FoodServices(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .foodservices))
-        let foodServicesAccessArea = foodServicesAccess.isUserAllowedInArea(.amusement)
-        let foodServicesAccessArea2 = foodServicesAccess.isUserAllowedInArea(.kitchen)
-        let foodServicesAccessArea3 = foodServicesAccess.isUserAllowedInArea(.maintenance)
-        let foodServicesAccessRide = foodServicesAccess.isUserAllowedInRide(.skipAllLines)
-        let foodServicesAccessDiscount = foodServicesAccess.isUserAllowedDiscount(of: .merchandise)
+        let foodServicesAccessArea = foodServicesAccess.swipe(area: AreaAccess.amusement)
+        let foodServicesAccessArea2 = foodServicesAccess.swipe(area: AreaAccess.kitchen)
+        let foodServicesAccessArea3 = foodServicesAccess.swipe(area: AreaAccess.maintenance)
+        let foodServicesAccessRide = foodServicesAccess.swipe(area: RideAccess.skipAllLines)
+        let foodServicesAccessDiscount = foodServicesAccess.swipe(area: DiscountType.merchandise)
         
         print("Food Services Employee user \n \(foodServicesAccessArea.description) \n \(foodServicesAccessArea2.description) \n \(foodServicesAccessArea3.description) \n \(foodServicesAccessRide.description) \n \(foodServicesAccessDiscount.description) \n")
-    */
+    
         // --- Ride Service Employee access
         // Testing: Can access Amusement Area?, Can access Ride Control? Can access Office Area?, Skip lines? food discount?
     /*

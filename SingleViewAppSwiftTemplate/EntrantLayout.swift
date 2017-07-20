@@ -14,9 +14,7 @@ protocol PeopleType {
     var rideAccess: [RideAccess] { get }
     var personalInfo: [PersonalInfo] { get }
     var discountAccess: DiscountAccess { get }
-    func isUserAllowedInArea(_ area: AreaAccess) -> (bool: Bool, description: String)
-    func isUserAllowedInRide(_ ride: RideAccess) -> (bool: Bool, description: String)
-    func isUserAllowedDiscount(of discount: DiscountType) -> (bool: Bool, description: String)
+    func swipe<T: Swipe>(area: T) -> (bool: Bool, description: String)
 }
 
 protocol ChildType {
@@ -29,6 +27,10 @@ protocol EmployeeType {
     init(_ nameAddress: NameAddress)
 }
 
+protocol Swipe {
+    
+}
+
 enum EntrantType: String {
     case none = "Error no user selected"
     case classicguest = "Classic Guest Pass"
@@ -38,6 +40,10 @@ enum EntrantType: String {
     case rideservices = "Employee Ride Services Pass"
     case maintenance = "Employee Maintenance Pass"
     case manager = "Manager Pass"
+    case seasonguest = "Season Guest Pass"
+    case seniorguest = "Senior Guest Pass"
+    case contract = "Contract Employee Pass"
+    case vendor = "Vendor Pass"
 }
 
 enum AreaAccess: String {
@@ -47,6 +53,7 @@ enum AreaAccess: String {
     case maintenance = "Maintenance"
     case office = "Office"
 }
+
 
 enum RideAccess: String {
     case allrides = "Access All Rides"
@@ -67,6 +74,10 @@ enum DiscountType {
     case food
     case merchandise
 }
+
+extension AreaAccess: Swipe {}
+extension RideAccess: Swipe {}
+extension DiscountType: Swipe {}
 
 enum PersonalInfo {
     case none
