@@ -42,8 +42,15 @@ enum EntrantType: String {
     case manager = "Manager Pass"
     case seasonguest = "Season Guest Pass"
     case seniorguest = "Senior Guest Pass"
-    case contract = "Contract Employee Pass"
-    case vendor = "Vendor Pass"
+    case contract1001 = "Contract Employee Project 1001 Pass"
+    case contract1002 = "Contract Employee Project 1002 Pass"
+    case contract1003 = "Contract Employee Project 1003 Pass"
+    case contract2001 = "Contract Employee Project 2001 Pass"
+    case contract2002 = "Contract Employee Project 2002 Pass"
+    case vendoracme = "Vendor Acme Pass"
+    case vendororkin = "Vendor Orkin Pass"
+    case vendorfedex = "Vendor Fedex Pass"
+    case vendorneweletrical = "Vendor NW Electrical Pass"
 }
 
 enum AreaAccess: String {
@@ -97,6 +104,7 @@ struct DiscountAccess {
     
     enum DiscountMerchendise: String {
         case none = "No Merch Discount"
+        case ten = "10% Merch Discount"
         case twenty = "20% Merch Discount"
         case twentyfive = "25% Merch Discount"
     }
@@ -116,6 +124,8 @@ struct NameAddress {
     let zipCode: String
     let entrantType: EntrantType
     
+    
+    //For users who require to input all name and address details
     init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, entrantType: EntrantType) throws {
         
         self.entrantType = entrantType
@@ -152,6 +162,29 @@ struct NameAddress {
         self.city = cityUnwrapped
         self.state = stateUnwrapped
         self.zipCode = zipCodeUnwrapped
+    }
+    
+    // for user who only need to enter first and last name
+    init(firstName: String?, lastName: String?, entrantType: EntrantType) throws {
+        self.entrantType = entrantType
+        
+        // Check to make sure no blank details given
+        
+        guard let firstNameUnwrapped = firstName, firstNameUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "First Name", user: self.entrantType)
+        }
+        
+        guard let lastNameUnwrapped = lastName, lastNameUnwrapped != "" else {
+            throw InvalidNameAddressError.invalidDetails(errorDetails: "Last Name", user: self.entrantType)
+        }
+        
+        self.firstName = firstNameUnwrapped
+        self.lastName = lastNameUnwrapped
+        self.streetAddress = ""
+        self.city = ""
+        self.state = ""
+        self.zipCode = ""
+        
     }
     
 }

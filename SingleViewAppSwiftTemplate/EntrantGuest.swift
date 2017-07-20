@@ -65,3 +65,20 @@ class SeasonGuest: Guest {
     }
     
 }
+
+class SeniorGuest: Guest {
+    
+    var age: Int = 0
+    
+    var nameAddress: NameAddress
+    
+    required init(_ nameAddress: NameAddress, dateOfBirth: String?) throws {
+        self.nameAddress = nameAddress
+        super.init()
+        self.age = try calcAge(birthDate: dateOfBirth)
+        self.entrantType = .seasonguest
+        self.rideAccess = [.skipAllLines, .allrides]
+        self.discountAccess = DiscountAccess(food: .ten, merchendise: .ten)
+    }
+    
+}
