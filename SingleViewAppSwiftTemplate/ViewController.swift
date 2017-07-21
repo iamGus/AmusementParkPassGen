@@ -142,9 +142,17 @@ class ViewController: UIViewController {
         print("Maintenance Employee user \n \(maintenanceAccessArea.description) \n \(maintenanceAccessArea2.description) \n \(maintenanceAccessArea3.description) \n \(maintenanceAccessArea4.description) \n \(maintenanceAccessRide.description) \n \(maintenanceAccessDiscount.description) \n")
     */
            
-            let vendor = try VendorAcme(firstName: "Gus", lastName: "Muller", entrantType: .vendoracme, dateOfBirth: "12/05/1976", company: nil, dateOfVisit: "21/06/2017")
+            let vendor = try VendorAcme(firstName: "Gus", lastName: "Muller", entrantType: .vendoracme, dateOfBirth: "12/05/1976", company: "Acme", dateOfVisit: "21/06/2017")
             
             print("dob: \(vendor.dob) address: \(vendor.nameAddress.fullName)")
+            
+            let seniorGuest = try SeniorGuest(firstName: "Angus", lastName: "Muller", entrantType: .seniorguest, dateOfBirth: "08/03/1943")
+            
+            print("\(seniorGuest.nameAddress.fullName)")
+            
+            let contract = try ContractEmployee1001(NameAddress(firstName: "Gus", lastName: "Muller", streetAddress: "Street", city: "City", state: "state", zipCode: "BS8HSG", entrantType: .contract1001))
+            
+            print(contract.rideAccess)
             
         // --- Manager Employee access
         // Testing: Can access Amusement Area?, Can access Maintenance? Can access Office Area?, Can access Ride Control? Skip lines? Merchandise discount?

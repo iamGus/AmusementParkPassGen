@@ -20,13 +20,14 @@ class Vendor: People {
     init(firstName: String?, lastName: String?, entrantType: EntrantType, dateOfBirth: String?, company: String?, dateOfVisit: String?) throws {
         self.nameAddress = try NameAddress(firstName: firstName, lastName: lastName, entrantType: entrantType)
         super.init()
-        if let companyHasData = company {
+        if let companyHasData = company, companyHasData != "" {
             self.company = companyHasData
         } else {
             throw InvalidNameAddressError.invalidCompanyName
         }
         self.dateOfVisit = try calcAge(birthDate: dateOfVisit).dob
         self.dob = try calcAge(birthDate: dateOfBirth).dob
+        self.rideAccess = []
     }
 }
 
@@ -36,7 +37,6 @@ class VendorAcme: Vendor {
         try super.init(firstName: firstName, lastName: lastName, entrantType: entrantType, dateOfBirth: dateOfBirth, company: company, dateOfVisit: dateOfVisit)
         self.entrantType = .vendoracme
         self.areaAccess = [.kitchen]
-        self.rideAccess = []
     }
 
 }
@@ -47,7 +47,6 @@ class VendorOrkin: Vendor {
         try super.init(firstName: firstName, lastName: lastName, entrantType: entrantType, dateOfBirth: dateOfBirth, company: company, dateOfVisit: dateOfVisit)
         self.entrantType = .vendororkin
         self.areaAccess = [.amusement, .ridecontrol, .kitchen]
-        self.rideAccess = []
     }
 }
 
@@ -57,7 +56,6 @@ class VendorFedex: Vendor {
         try super.init(firstName: firstName, lastName: lastName, entrantType: entrantType, dateOfBirth: dateOfBirth, company: company, dateOfVisit: dateOfVisit)
         self.entrantType = .vendorfedex
         self.areaAccess = [.maintenance, .office]
-        self.rideAccess = []
     }
 }
 
@@ -67,7 +65,6 @@ class VendorNWElectrical: Vendor {
         try super.init(firstName: firstName, lastName: lastName, entrantType: entrantType, dateOfBirth: dateOfBirth, company: company, dateOfVisit: dateOfVisit)
         self.entrantType = .vendorneweletrical
         self.areaAccess = [.kitchen, .amusement, .maintenance, .office , .ridecontrol]
-        self.rideAccess = []
     }
 }
 

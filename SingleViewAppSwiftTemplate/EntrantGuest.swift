@@ -91,8 +91,8 @@ class SeniorGuest: Guest {
         self.discountAccess = DiscountAccess(food: .ten, merchendise: .ten)
     }
     
-    convenience init(_ nameAddress: NameAddress, dateOfBirth: String?) throws {
-        self.init(nameAddress)
+    convenience init(firstName: String?, lastName: String?, entrantType: EntrantType, dateOfBirth: String?) throws {
+        try self.init(NameAddress(firstName: firstName, lastName: lastName, entrantType: entrantType))
         let ageAndDob = try calcAge(birthDate: dateOfBirth)
         self.dob = ageAndDob.dob
         self.age = ageAndDob.age
