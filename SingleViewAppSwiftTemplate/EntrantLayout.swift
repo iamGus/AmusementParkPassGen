@@ -75,6 +75,7 @@ enum InvalidAgeDataError: Error {
 
 enum InvalidNameAddressError: Error {
     case invalidDetails(errorDetails: String, user: EntrantType)
+    case invalidCompanyName
 }
 
 enum DiscountType {

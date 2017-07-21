@@ -16,6 +16,9 @@ class People: PeopleType {
     var personalInfo: [PersonalInfo] = [.none]
     var discountAccess: DiscountAccess = DiscountAccess(food: .none, merchendise: .none)
     
+    init() {
+    }
+    
     //Check access and discount swipe function
     func swipe<T: Swipe>(area: T) -> (bool: Bool, description: String) {
         
@@ -67,8 +70,8 @@ class People: PeopleType {
     
    
     
-    // To take a date of birth and return age in Int
-    func calcAge(birthDate: String?) throws -> Int {
+    // To take a date of birth, check correct format and return dob back abnd age in Int
+    func calcAge(birthDate: String?) throws -> (age: Int, dob: String) {
         //chech there is data in string input
         guard let date = birthDate, date != "" else {
             throw InvalidAgeDataError.missingBirthdayData
@@ -108,7 +111,7 @@ class People: PeopleType {
         
         if let dateOfBirth = Calendar.current.date(from: DateComponents(year: year, month: month, day: day)) {
             if let returnYear = Calendar.current.dateComponents([.year], from: dateOfBirth, to: Date()).year {
-                return returnYear
+                return (returnYear, date)
             }
             throw InvalidAgeDataError.invalidAgeData
         }
