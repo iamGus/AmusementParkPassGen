@@ -8,10 +8,53 @@
 
 import UIKit
 
+// Extension to help pin background to stackview edges for top meny bar
+public extension UIView {
+    public func pin(to view: UIView) {
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topAnchor.constraint(equalTo: view.topAnchor),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+    }
+}
+
 class ViewController: UIViewController {
+   
+    //Outlets
+    @IBOutlet weak var topMenubar: UIStackView!
+    @IBOutlet weak var guestTopButton: UIButton!
+    @IBOutlet weak var employeeTopButton: UIButton!
+    @IBOutlet weak var managerTopButton: UIButton!
+    @IBOutlet weak var vendorTopButton: UIButton!
+    
+    
+    // Creat a view taht will be the Top meny background colour
+    private lazy var backgroundTopMenuView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 139/255, green: 109/255, blue: 169/255, alpha: 1)
+        return view
+    }()
+    
+    // Pinning the background to stackview at index 0 of stackview sunview array
+    private func pinBackground(_ view: UIView, to stackView: UIStackView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
+        stackView.insertSubview(view, at: 0)
+        view.pin(to: stackView)
+    }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // Setting background coloyrs to meu bars
+        pinBackground(backgroundTopMenuView, to: topMenubar)
+        
+        
+        
         
         // ---------------------------------------------------------
         // ---- Checking creation of a user ticket and checking errors ----
@@ -187,6 +230,23 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    @IBAction func topMenuButtons(_ sender: UIButton) {
+        let topMenuItems = [guestTopButton, employeeTopButton, managerTopButton, vendorTopButton]
+        
+        for eachButton in topMenuItems {
+            eachButton?.titleLabel?.font = UIFont(name: "system", size: 18.0)
+            eachButton?.setTitleColor(UIColor.init(red: 206/255, green: 162/255, blue: 255/255, alpha: 1), for: .normal)
+        }
+        
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        sender.setTitleColor(UIColor.white, for: .normal)
+        
+    }
+    
+    
+    
+    
 
 }
 
