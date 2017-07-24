@@ -26,9 +26,9 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waA-dI-mY5">
                                         <rect key="frame" x="0.0" y="0.0" width="208.5" height="70"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Guest">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.80745577810000002" green="0.63705790039999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="topMenuButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7aN-eI-K00"/>
@@ -36,7 +36,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mkH-ay-OyC">
                                         <rect key="frame" x="208.5" y="0.0" width="208.5" height="70"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Employee">
                                             <color key="titleColor" red="0.80745577812194824" green="0.63705790042877197" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -44,10 +44,10 @@
                                             <action selector="topMenuButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="agv-3D-LB4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FK4-ZL-W2N">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FK4-ZL-W2N" userLabel="Contractor Top Button">
                                         <rect key="frame" x="417" y="0.0" width="208.5" height="70"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Manager">
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Contractor">
                                             <color key="titleColor" red="0.80919802557314147" green="0.63712244071918045" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -56,7 +56,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O55-wS-VRR">
                                         <rect key="frame" x="625.5" y="0.0" width="208.5" height="70"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Vendor">
                                             <color key="titleColor" red="0.80919802557314147" green="0.63712244071918045" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -70,18 +70,158 @@
                                     <constraint firstAttribute="height" constant="70" id="Afl-CE-Zcb"/>
                                 </constraints>
                             </stackView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="VYA-SL-cw6" userLabel="Guest Sub Menu">
+                                <rect key="frame" x="0.0" y="70" width="834" height="50"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIP-ef-2cr">
+                                        <rect key="frame" x="0.0" y="0.0" width="119" height="50"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvU-n5-qAe">
+                                        <rect key="frame" x="119" y="0.0" width="119.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Child">
+                                            <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t3c-yx-kNo"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMS-CT-41p">
+                                        <rect key="frame" x="238.5" y="0.0" width="119" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Adult">
+                                            <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xam-YB-69u"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIR-aQ-4ka">
+                                        <rect key="frame" x="357.5" y="0.0" width="119" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Senior">
+                                            <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jZb-Ry-gH5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRX-ly-xkQ">
+                                        <rect key="frame" x="476.5" y="0.0" width="119" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="VIP">
+                                            <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A4U-DB-cGe"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTl-QH-pKr">
+                                        <rect key="frame" x="595.5" y="0.0" width="119.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Season Pass">
+                                            <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o5K-Gq-Pj9"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLk-nl-Eim">
+                                        <rect key="frame" x="715" y="0.0" width="119" height="50"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.24529480934143066" green="0.21081984043121338" blue="0.27981656789779663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2ad-HM-Mzj"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvq-VQ-W4j" userLabel="Blank sub Menu">
+                                <rect key="frame" x="0.0" y="70" width="834" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AN0-J0-SBm"/>
+                                </constraints>
+                            </stackView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Pxb-nx-dqS" userLabel="Employee Sub Menu">
+                                <rect key="frame" x="0.0" y="70" width="834" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71z-kv-aZe">
+                                        <rect key="frame" x="0.0" y="0.0" width="208.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Food Services">
+                                            <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rZP-Bh-sSx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCy-JH-isf">
+                                        <rect key="frame" x="208.5" y="0.0" width="208.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Ride Services">
+                                            <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gff-PK-VaW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNU-b7-dxl">
+                                        <rect key="frame" x="417" y="0.0" width="208.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Maintenance Services">
+                                            <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OjN-gj-ikL"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbo-nH-PPB">
+                                        <rect key="frame" x="625.5" y="0.0" width="208.5" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Manager">
+                                            <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oHl-eS-QOv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lYl-oq-MrL"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.85773247480392456" green="0.83886104822158813" blue="0.8734818696975708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="VYA-SL-cw6" firstAttribute="top" secondItem="Wsy-Vc-yzH" secondAttribute="bottom" id="47X-d4-yMu"/>
+                            <constraint firstAttribute="trailing" secondItem="VYA-SL-cw6" secondAttribute="trailing" id="7sQ-XP-lpL"/>
+                            <constraint firstItem="hvq-VQ-W4j" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A6a-Oz-Rwe"/>
+                            <constraint firstItem="Pxb-nx-dqS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DDe-bh-G8Q"/>
+                            <constraint firstItem="Pxb-nx-dqS" firstAttribute="top" secondItem="Wsy-Vc-yzH" secondAttribute="bottom" id="HLS-bQ-jzv"/>
+                            <constraint firstItem="hvq-VQ-W4j" firstAttribute="top" secondItem="Wsy-Vc-yzH" secondAttribute="bottom" id="OeV-u6-tEI"/>
                             <constraint firstItem="Wsy-Vc-yzH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="TOF-x2-NcX"/>
                             <constraint firstItem="Wsy-Vc-yzH" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="V3Y-Uk-rtt"/>
+                            <constraint firstAttribute="trailing" secondItem="Pxb-nx-dqS" secondAttribute="trailing" id="bUk-Zl-P8B"/>
                             <constraint firstAttribute="trailing" secondItem="Wsy-Vc-yzH" secondAttribute="trailing" id="lu4-rq-wUO"/>
+                            <constraint firstAttribute="trailing" secondItem="hvq-VQ-W4j" secondAttribute="trailing" id="txJ-qi-by2"/>
+                            <constraint firstItem="VYA-SL-cw6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vN6-aK-6c0"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contractorTopButton" destination="FK4-ZL-W2N" id="hYD-oa-qtZ"/>
                         <outlet property="employeeTopButton" destination="mkH-ay-OyC" id="DxP-DR-USo"/>
                         <outlet property="guestTopButton" destination="waA-dI-mY5" id="RD5-a7-yoR"/>
-                        <outlet property="managerTopButton" destination="FK4-ZL-W2N" id="CZe-aJ-imX"/>
+                        <outlet property="subMenuBlank" destination="hvq-VQ-W4j" id="s4u-gq-kOd"/>
+                        <outlet property="subMenuEmployee" destination="Pxb-nx-dqS" id="3et-IN-fLW"/>
+                        <outlet property="subMenuEmployeeFoodButton" destination="71z-kv-aZe" id="CkY-U2-yE1"/>
+                        <outlet property="subMenuEmployeeMaintenanceButton" destination="PNU-b7-dxl" id="52z-NR-RV2"/>
+                        <outlet property="subMenuEmployeeManagerButton" destination="zbo-nH-PPB" id="TYy-7X-qTM"/>
+                        <outlet property="subMenuEmployeeRideButton" destination="lCy-JH-isf" id="ERc-iA-zAY"/>
+                        <outlet property="subMenuGuest" destination="VYA-SL-cw6" id="4uB-1a-vsP"/>
+                        <outlet property="subMenuGuestAdult" destination="RMS-CT-41p" id="svW-y6-B6W"/>
+                        <outlet property="subMenuGuestChild" destination="LvU-n5-qAe" id="wn1-06-eGh"/>
+                        <outlet property="subMenuGuestSeasonPass" destination="zTl-QH-pKr" id="Q0S-uT-KyS"/>
+                        <outlet property="subMenuGuestSenior" destination="PIR-aQ-4ka" id="PUj-ft-Yvd"/>
+                        <outlet property="subMenuGuestVIP" destination="RRX-ly-xkQ" id="FMc-M6-K0C"/>
                         <outlet property="topMenubar" destination="Wsy-Vc-yzH" id="JK8-Rl-DQx"/>
                         <outlet property="vendorTopButton" destination="O55-wS-VRR" id="rgi-5w-4u4"/>
                     </connections>

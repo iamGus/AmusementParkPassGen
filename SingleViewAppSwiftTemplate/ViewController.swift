@@ -24,18 +24,58 @@ class ViewController: UIViewController {
    
     //Outlets
     @IBOutlet weak var topMenubar: UIStackView!
+    @IBOutlet weak var subMenuBlank: UIStackView!
+    @IBOutlet weak var subMenuGuest: UIStackView!
+    @IBOutlet weak var subMenuEmployee: UIStackView!
+    
     @IBOutlet weak var guestTopButton: UIButton!
     @IBOutlet weak var employeeTopButton: UIButton!
-    @IBOutlet weak var managerTopButton: UIButton!
+    @IBOutlet weak var contractorTopButton: UIButton!
     @IBOutlet weak var vendorTopButton: UIButton!
     
+    //Guest Sub Menu outlets
+    @IBOutlet weak var subMenuGuestChild: UIButton!
+    @IBOutlet weak var subMenuGuestAdult: UIButton!
+    @IBOutlet weak var subMenuGuestSenior: UIButton!
+    @IBOutlet weak var subMenuGuestVIP: UIButton!
+    @IBOutlet weak var subMenuGuestSeasonPass: UIButton!
     
-    // Creat a view taht will be the Top meny background colour
+    //Employee Sub Menu outlets
+    @IBOutlet weak var subMenuEmployeeFoodButton: UIButton!
+    @IBOutlet weak var subMenuEmployeeRideButton: UIButton!
+    @IBOutlet weak var subMenuEmployeeMaintenanceButton: UIButton!
+    @IBOutlet weak var subMenuEmployeeManagerButton: UIButton!
+    
+    var entrantSelected: EntrantType = .none
+    
+    
+    // Create a view that will be the Top meny background colour
     private lazy var backgroundTopMenuView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 139/255, green: 109/255, blue: 169/255, alpha: 1)
         return view
     }()
+    
+    
+    
+    private lazy var backgroundSubMenuBlankView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 63/255, green: 54/255, blue: 71/255, alpha: 1)
+        return view
+    }()
+    
+    private lazy var backgroundSubMenuGuestView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 63/255, green: 54/255, blue: 71/255, alpha: 1)
+        return view
+    }()
+    
+    private lazy var backgroundSubMenuEmployeeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 63/255, green: 54/255, blue: 71/255, alpha: 1)
+        return view
+    }()
+  
     
     // Pinning the background to stackview at index 0 of stackview sunview array
     private func pinBackground(_ view: UIView, to stackView: UIStackView) {
@@ -52,8 +92,9 @@ class ViewController: UIViewController {
         
         // Setting background coloyrs to meu bars
         pinBackground(backgroundTopMenuView, to: topMenubar)
-        
-        
+        pinBackground(backgroundSubMenuGuestView, to: subMenuGuest)
+        pinBackground(backgroundSubMenuBlankView, to: subMenuBlank)
+        pinBackground(backgroundSubMenuEmployeeView, to: subMenuEmployee)
         
         
         // ---------------------------------------------------------
@@ -232,20 +273,101 @@ class ViewController: UIViewController {
 
     
     @IBAction func topMenuButtons(_ sender: UIButton) {
-        let topMenuItems = [guestTopButton, employeeTopButton, managerTopButton, vendorTopButton]
+        let topMenuItems = [guestTopButton, employeeTopButton, contractorTopButton, vendorTopButton]
         
+        //Set all menu items to inactive style
         for eachButton in topMenuItems {
-            eachButton?.titleLabel?.font = UIFont(name: "system", size: 18.0)
+            eachButton?.titleLabel?.font = UIFont(name: "system", size: 20.0)
             eachButton?.setTitleColor(UIColor.init(red: 206/255, green: 162/255, blue: 255/255, alpha: 1), for: .normal)
         }
         
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
+        //set the button clicked to active style
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
         sender.setTitleColor(UIColor.white, for: .normal)
+        
+        //show the sub menu for the button clicked and hide other sub menu
+        if sender == guestTopButton {
+            subMenuBlank.isHidden = true
+            subMenuEmployee.isHidden = true
+            subMenuGuest.isHidden = false
+            
+            //reset submenu to inactive style
+            subMenuGuestReset()
+        } else if sender == employeeTopButton {
+            subMenuBlank.isHidden = true
+            subMenuGuest.isHidden = true
+            subMenuEmployee.isHidden = false
+            
+            //reset submenu to inactive style
+            subMenuEmployeeReset()
+        }
         
     }
     
     
+    @IBAction func subMenuGuestButtons(_ sender: UIButton) {
+        
+        //reset submenu to inactive style
+        subMenuGuestReset()
+        
+        //set the button clicked to active style
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+        sender.setTitleColor(UIColor.white, for: .normal)
+        
+        //Set current type of entrant selected
+        senderToCurrentEntrantState(buttonPressed: sender)
+        
+    }
     
+    @IBAction func subMenuEmployeeButtons(_ sender: UIButton) {
+        //reset submenu to inactive style
+        subMenuEmployeeReset()
+        
+        //set the button clicked to active style
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+        sender.setTitleColor(UIColor.white, for: .normal)
+        
+        //Set current type of entrant selected
+        senderToCurrentEntrantState(buttonPressed: sender)
+    }
+    
+    
+    
+    func subMenuGuestReset() {
+         let subMenuGuestItems = [subMenuGuestChild, subMenuGuestAdult, subMenuGuestSenior, subMenuGuestVIP, subMenuGuestSeasonPass]
+        
+         for eachButton in subMenuGuestItems {
+            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
+            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
+        }
+        
+    }
+    
+    
+    func subMenuEmployeeReset() {
+        let subMenuGuestItems = [subMenuEmployeeFoodButton, subMenuEmployeeRideButton, subMenuEmployeeMaintenanceButton, subMenuEmployeeManagerButton]
+        
+        for eachButton in subMenuGuestItems {
+            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
+            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
+        }
+        
+    }
+    
+    func senderToCurrentEntrantState(buttonPressed: UIButton) {
+        switch buttonPressed {
+        case subMenuGuestChild: entrantSelected = .freechildguest
+        case subMenuGuestAdult: entrantSelected = .classicguest
+        case subMenuGuestSenior: entrantSelected = .seniorguest
+        case subMenuGuestVIP: entrantSelected = .vipguest
+        case subMenuGuestSeasonPass: entrantSelected = .seasonguest
+        case subMenuEmployeeFoodButton: entrantSelected = .foodservices
+        case subMenuEmployeeRideButton: entrantSelected = .rideservices
+        case subMenuEmployeeMaintenanceButton: entrantSelected = .maintenance
+        case subMenuEmployeeManagerButton: entrantSelected = .manager
+        default: entrantSelected = .none
+        }
+    }
     
 
 }
