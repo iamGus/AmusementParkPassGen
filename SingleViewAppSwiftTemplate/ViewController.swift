@@ -22,12 +22,15 @@ public extension UIView {
 
 class ViewController: UIViewController {
    
-    //Outlets
+    //Menu StackView Outlets
     @IBOutlet weak var topMenubar: UIStackView!
     @IBOutlet weak var subMenuBlank: UIStackView!
     @IBOutlet weak var subMenuGuest: UIStackView!
     @IBOutlet weak var subMenuEmployee: UIStackView!
+    @IBOutlet weak var subMenuContractor: UIStackView!
+    @IBOutlet weak var subMenuVendor: UIStackView!
     
+    //Top Menu ourlets
     @IBOutlet weak var guestTopButton: UIButton!
     @IBOutlet weak var employeeTopButton: UIButton!
     @IBOutlet weak var contractorTopButton: UIButton!
@@ -46,6 +49,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var subMenuEmployeeMaintenanceButton: UIButton!
     @IBOutlet weak var subMenuEmployeeManagerButton: UIButton!
     
+    //Contractor Sub Menu outlets
+    @IBOutlet weak var subMenuContractor1001Button: UIButton!
+    @IBOutlet weak var subMenuContractor1002Button: UIButton!
+    @IBOutlet weak var subMenuContractor1003Button: UIButton!
+    @IBOutlet weak var subMenuContractor2001Button: UIButton!
+    @IBOutlet weak var subMenuContractor2002Button: UIButton!
+    
+    //Vendor Sub Menu outlets
+    @IBOutlet weak var subMenuVendorAcmeButton: UIButton!
+    @IBOutlet weak var subMenuVendorOrkinButton: UIButton!
+    @IBOutlet weak var subMenuVendorFedexButton: UIButton!
+    @IBOutlet weak var subMenuVendorNWElectricalButton: UIButton!
+    
+    
+    @IBOutlet weak var dobTextField: CustomTextField!
+    
+    @IBOutlet weak var dateVisitField: CustomTextField!
+    
+    @IBOutlet weak var projectTextField: CustomTextField!
+    
+    
+    
+    //Set properties
     var entrantSelected: EntrantType = .none
     
     
@@ -75,6 +101,18 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor(red: 63/255, green: 54/255, blue: 71/255, alpha: 1)
         return view
     }()
+    
+    private lazy var backgroundSubMenuContractorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 63/255, green: 54/255, blue: 71/255, alpha: 1)
+        return view
+    }()
+    
+    private lazy var backgroundSubMenuVendorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 63/255, green: 54/255, blue: 71/255, alpha: 1)
+        return view
+    }()
   
     
     // Pinning the background to stackview at index 0 of stackview sunview array
@@ -84,6 +122,7 @@ class ViewController: UIViewController {
         view.pin(to: stackView)
     }
     
+
     
 
     override func viewDidLoad() {
@@ -95,7 +134,11 @@ class ViewController: UIViewController {
         pinBackground(backgroundSubMenuGuestView, to: subMenuGuest)
         pinBackground(backgroundSubMenuBlankView, to: subMenuBlank)
         pinBackground(backgroundSubMenuEmployeeView, to: subMenuEmployee)
-        
+        pinBackground(backgroundSubMenuContractorView, to: subMenuContractor)
+        pinBackground(backgroundSubMenuVendorView, to: subMenuVendor)
+        dateVisitField.isEnabled = false
+        projectTextField.isEnabled = false
+        dobTextField.isEnabled = true
         
         // ---------------------------------------------------------
         // ---- Checking creation of a user ticket and checking errors ----
@@ -290,16 +333,31 @@ class ViewController: UIViewController {
             subMenuBlank.isHidden = true
             subMenuEmployee.isHidden = true
             subMenuGuest.isHidden = false
+            subMenuVendor.isHidden = true
+            subMenuContractor.isHidden = true
             
-            //reset submenu to inactive style
-            subMenuGuestReset()
+  
         } else if sender == employeeTopButton {
             subMenuBlank.isHidden = true
             subMenuGuest.isHidden = true
+            subMenuContractor.isHidden = true
+            subMenuVendor.isHidden = true
             subMenuEmployee.isHidden = false
             
-            //reset submenu to inactive style
-            subMenuEmployeeReset()
+  
+        } else if sender == contractorTopButton {
+            subMenuBlank.isHidden = true
+            subMenuGuest.isHidden = true
+            subMenuEmployee.isHidden = true
+            subMenuVendor.isHidden = true
+            subMenuContractor.isHidden = false
+            
+        } else if sender == vendorTopButton {
+            subMenuBlank.isHidden = true
+            subMenuGuest.isHidden = true
+            subMenuEmployee.isHidden = true
+            subMenuContractor.isHidden = true
+            subMenuVendor.isHidden = false
         }
         
     }
@@ -308,7 +366,7 @@ class ViewController: UIViewController {
     @IBAction func subMenuGuestButtons(_ sender: UIButton) {
         
         //reset submenu to inactive style
-        subMenuGuestReset()
+        subMenuReset()
         
         //set the button clicked to active style
         sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -316,12 +374,12 @@ class ViewController: UIViewController {
         
         //Set current type of entrant selected
         senderToCurrentEntrantState(buttonPressed: sender)
-        
+        print(entrantSelected)
     }
     
     @IBAction func subMenuEmployeeButtons(_ sender: UIButton) {
         //reset submenu to inactive style
-        subMenuEmployeeReset()
+        subMenuReset()
         
         //set the button clicked to active style
         sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
@@ -329,14 +387,52 @@ class ViewController: UIViewController {
         
         //Set current type of entrant selected
         senderToCurrentEntrantState(buttonPressed: sender)
+        print(entrantSelected)
+    }
+    
+    @IBAction func subMenuContractorButtons(_ sender: UIButton) {
+        //reset submenu to inactive style
+        subMenuReset()
+        
+        //set the button clicked to active style
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+        sender.setTitleColor(UIColor.white, for: .normal)
+        
+        //Set current type of entrant selected
+        senderToCurrentEntrantState(buttonPressed: sender)
+        print(entrantSelected)
+    }
+    
+    @IBAction func subMenuVendorButtons(_ sender: UIButton) {
+        //reset submenu to inactive style
+        subMenuReset()
+        
+        //set the button clicked to active style
+        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+        sender.setTitleColor(UIColor.white, for: .normal)
+        
+        //Set current type of entrant selected
+        senderToCurrentEntrantState(buttonPressed: sender)
+        print(entrantSelected)
     }
     
     
-    
-    func subMenuGuestReset() {
-         let subMenuGuestItems = [subMenuGuestChild, subMenuGuestAdult, subMenuGuestSenior, subMenuGuestVIP, subMenuGuestSeasonPass]
+    //Set all sub menu button lables back to inactive state
+    func subMenuReset() {
+        let subMenuItems = [subMenuGuestChild, subMenuGuestAdult, subMenuGuestSenior, subMenuGuestVIP, subMenuGuestSeasonPass, subMenuEmployeeFoodButton, subMenuEmployeeRideButton, subMenuEmployeeMaintenanceButton, subMenuEmployeeManagerButton, subMenuContractor1001Button, subMenuContractor1002Button, subMenuContractor1003Button, subMenuContractor2001Button, subMenuContractor2002Button, subMenuVendorAcmeButton, subMenuVendorOrkinButton, subMenuVendorFedexButton, subMenuVendorNWElectricalButton]
         
-         for eachButton in subMenuGuestItems {
+        for eachButton in subMenuItems {
+            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
+            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
+        }
+        
+    }
+    
+    //NOTE should be able to remove the below reset funcs
+    func subMenuGuestReset() {
+         let subMenuItems = [subMenuGuestChild, subMenuGuestAdult, subMenuGuestSenior, subMenuGuestVIP, subMenuGuestSeasonPass]
+        
+         for eachButton in subMenuItems {
             eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
             eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
         }
@@ -345,14 +441,27 @@ class ViewController: UIViewController {
     
     
     func subMenuEmployeeReset() {
-        let subMenuGuestItems = [subMenuEmployeeFoodButton, subMenuEmployeeRideButton, subMenuEmployeeMaintenanceButton, subMenuEmployeeManagerButton]
+        let subMenuItems = [subMenuEmployeeFoodButton, subMenuEmployeeRideButton, subMenuEmployeeMaintenanceButton, subMenuEmployeeManagerButton]
         
-        for eachButton in subMenuGuestItems {
+        for eachButton in subMenuItems {
             eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
             eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
         }
         
     }
+    
+    func subMenuContractorReset() {
+        let subMenuItems = [subMenuContractor1001Button, subMenuContractor1002Button, subMenuContractor1003Button, subMenuContractor2001Button, subMenuContractor2002Button]
+        
+        for eachButton in subMenuItems {
+            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
+            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
+        }
+        
+    }
+    
+    
+    
     
     func senderToCurrentEntrantState(buttonPressed: UIButton) {
         switch buttonPressed {
@@ -365,6 +474,15 @@ class ViewController: UIViewController {
         case subMenuEmployeeRideButton: entrantSelected = .rideservices
         case subMenuEmployeeMaintenanceButton: entrantSelected = .maintenance
         case subMenuEmployeeManagerButton: entrantSelected = .manager
+        case subMenuContractor1001Button: entrantSelected = .contract1001
+        case subMenuContractor1002Button: entrantSelected = .contract1002
+        case subMenuContractor1003Button: entrantSelected = .contract1003
+        case subMenuContractor2001Button: entrantSelected = .contract2001
+        case subMenuContractor2002Button: entrantSelected = .contract2002
+        case subMenuVendorAcmeButton: entrantSelected = .vendoracme
+        case subMenuVendorOrkinButton: entrantSelected = .vendororkin
+        case subMenuVendorFedexButton: entrantSelected = .vendorfedex
+        case subMenuVendorNWElectricalButton: entrantSelected = .vendorneweletrical
         default: entrantSelected = .none
         }
     }
