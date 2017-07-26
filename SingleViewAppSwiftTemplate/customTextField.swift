@@ -24,6 +24,8 @@ class CustomTextField: UITextField {
             self.layer.cornerRadius = 5.0
             self.layer.borderWidth = 1.5
             self.layer.borderColor = UIColor.gray.cgColor
+            
+            self.isEnabled = false
         }
 
 }

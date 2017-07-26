@@ -136,8 +136,6 @@ class ViewController: UIViewController {
         pinBackground(backgroundSubMenuEmployeeView, to: subMenuEmployee)
         pinBackground(backgroundSubMenuContractorView, to: subMenuContractor)
         pinBackground(backgroundSubMenuVendorView, to: subMenuVendor)
-        dateVisitField.isEnabled = false
-        projectTextField.isEnabled = false
         dobTextField.isEnabled = true
         
         // ---------------------------------------------------------
