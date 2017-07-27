@@ -10,6 +10,7 @@
 		180458791F1607A3008F2A96 /* EntrantGuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180458781F1607A3008F2A96 /* EntrantGuest.swift */; };
 		1804587B1F160837008F2A96 /* EntrantEmployee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804587A1F160837008F2A96 /* EntrantEmployee.swift */; };
 		1804587D1F16089B008F2A96 /* EntrantSuper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804587C1F16089B008F2A96 /* EntrantSuper.swift */; };
+		180F3C8D1F29D71700FBA1B2 /* Buttonex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F3C8C1F29D71700FBA1B2 /* Buttonex.swift */; };
 		1811682F1F20E723006E6520 /* EntrantContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811682E1F20E723006E6520 /* EntrantContract.swift */; };
 		181168311F20EF81006E6520 /* EntrantVendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181168301F20EF81006E6520 /* EntrantVendor.swift */; };
 		1827D6BB1F0A2E4E003D12F7 /* EntrantLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1827D6BA1F0A2E4E003D12F7 /* EntrantLayout.swift */; };
@@ -45,6 +46,7 @@
 		180458781F1607A3008F2A96 /* EntrantGuest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantGuest.swift; sourceTree = "<group>"; };
 		1804587A1F160837008F2A96 /* EntrantEmployee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantEmployee.swift; sourceTree = "<group>"; };
 		1804587C1F16089B008F2A96 /* EntrantSuper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantSuper.swift; sourceTree = "<group>"; };
+		180F3C8C1F29D71700FBA1B2 /* Buttonex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttonex.swift; sourceTree = "<group>"; };
 		1811682E1F20E723006E6520 /* EntrantContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantContract.swift; sourceTree = "<group>"; };
 		181168301F20EF81006E6520 /* EntrantVendor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantVendor.swift; sourceTree = "<group>"; };
 		1827D6BA1F0A2E4E003D12F7 /* EntrantLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantLayout.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				3A8AADD41DF9B85E00A2B931 /* Info.plist */,
 				18F985F71F275DA3001A973B /* customTextField.swift */,
 				18FB43A01F28C34B0007B7CE /* CustomLabel.swift */,
+				180F3C8C1F29D71700FBA1B2 /* Buttonex.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				180458791F1607A3008F2A96 /* EntrantGuest.swift in Sources */,
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
 				3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */,
+				180F3C8D1F29D71700FBA1B2 /* Buttonex.swift in Sources */,
 				1804587D1F16089B008F2A96 /* EntrantSuper.swift in Sources */,
 				1827D6BB1F0A2E4E003D12F7 /* EntrantLayout.swift in Sources */,
 				1811682F1F20E723006E6520 /* EntrantContract.swift in Sources */,

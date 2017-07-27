@@ -84,7 +84,7 @@
                                             <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t3c-yx-kNo"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1VC-2t-bme"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMS-CT-41p">
@@ -94,7 +94,7 @@
                                             <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xam-YB-69u"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vcq-au-NXQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIR-aQ-4ka">
@@ -104,7 +104,7 @@
                                             <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jZb-Ry-gH5"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xmf-GO-Q03"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRX-ly-xkQ">
@@ -114,7 +114,7 @@
                                             <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A4U-DB-cGe"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Akd-xn-Q0t"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTl-QH-pKr">
@@ -124,7 +124,7 @@
                                             <color key="titleColor" red="0.60338134630785489" green="0.5207618203215808" blue="0.6990940107911976" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuGuestButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="o5K-Gq-Pj9"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6si-7R-NGn"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dLk-nl-Eim">
@@ -152,7 +152,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rZP-Bh-sSx"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wdA-nN-0P1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCy-JH-isf">
@@ -162,7 +162,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gff-PK-VaW"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TPB-E6-wEx"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNU-b7-dxl">
@@ -172,7 +172,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OjN-gj-ikL"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ptx-Ys-pR6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbo-nH-PPB">
@@ -182,7 +182,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuEmployeeButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oHl-eS-QOv"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1fF-5l-26Q"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -200,7 +200,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuContractorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nDk-DU-r3w"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AVt-oT-3ft"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiW-zM-yTE">
@@ -210,7 +210,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuContractorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lh5-3J-ED8"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FPh-Uj-3kn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZM-ll-VhL">
@@ -220,7 +220,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuContractorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1R3-hM-XO2"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="An8-3I-ep8"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdt-yd-ZPn">
@@ -230,7 +230,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuContractorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qEN-cu-OzK"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YdP-7o-qrH"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mto-uq-fqt">
@@ -240,7 +240,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuContractorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ngX-aw-2tm"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qsB-Uw-UXZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -258,7 +258,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuVendorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zsC-48-bHT"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2f3-Wh-atE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wo9-z4-qF3">
@@ -268,7 +268,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuVendorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RCL-Gc-VvH"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oLN-jN-OS3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmm-u8-BoJ">
@@ -278,7 +278,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuVendorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bIa-C1-MJK"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RDf-i5-6ej"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5c6-Ce-Zal">
@@ -288,7 +288,7 @@
                                             <color key="titleColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="subMenuVendorButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IOW-lU-Exr"/>
+                                            <action selector="subMenuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OOr-3v-ZSm"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -296,7 +296,7 @@
                                     <constraint firstAttribute="height" constant="50" id="w02-hQ-vIz"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-xt-NST">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-xt-NST" userLabel="Main form body">
                                 <rect key="frame" x="0.0" y="145" width="834" height="707"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="kNY-qG-WGI" userLabel="dob and project line">
@@ -660,7 +660,7 @@
                                     <constraint firstAttribute="height" constant="2" id="gEe-d9-V9K"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="zzW-yg-iBx">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="zzW-yg-iBx" userLabel="Buttom buttons">
                                 <rect key="frame" x="30" y="942" width="774" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xai-UX-dma">
@@ -722,12 +722,27 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cityLabel" destination="202-rT-2TS" id="sXv-Xj-C8P"/>
+                        <outlet property="cityTextField" destination="6Wu-Ib-dMr" id="Rbt-BQ-6of"/>
+                        <outlet property="companyLabel" destination="me0-hJ-v9o" id="rW6-9j-S4G"/>
+                        <outlet property="companyTextField" destination="z94-25-esE" id="olN-Ft-s8C"/>
                         <outlet property="contractorTopButton" destination="FK4-ZL-W2N" id="hYD-oa-qtZ"/>
                         <outlet property="dateVisitField" destination="mlc-Mm-cfi" id="iTL-AI-b8F"/>
+                        <outlet property="dateVisitLabel" destination="zAB-sE-ucW" id="a4e-DF-sEy"/>
+                        <outlet property="dobLabel" destination="6ag-du-tHY" id="RFb-ow-hCs"/>
                         <outlet property="dobTextField" destination="LSg-4b-V6I" id="feC-Go-r5y"/>
                         <outlet property="employeeTopButton" destination="mkH-ay-OyC" id="DxP-DR-USo"/>
+                        <outlet property="firstNameLabel" destination="BHT-j6-8Zn" id="hfJ-gb-dr5"/>
+                        <outlet property="firstNameTextField" destination="Y1V-0S-KiT" id="2jd-JO-eLN"/>
                         <outlet property="guestTopButton" destination="waA-dI-mY5" id="RD5-a7-yoR"/>
+                        <outlet property="lastNameLabel" destination="TOC-86-JDq" id="6da-cZ-0Zd"/>
+                        <outlet property="lastNameTextField" destination="rOO-ek-Oa1" id="phq-iW-Gki"/>
+                        <outlet property="projectLabel" destination="mcm-QD-H6S" id="kCw-sK-3cB"/>
                         <outlet property="projectTextField" destination="ray-Ej-JQX" id="dUd-so-dCX"/>
+                        <outlet property="stateLabel" destination="OF2-hd-BQ2" id="qdh-UF-J0g"/>
+                        <outlet property="stateTextField" destination="hFA-Ss-LCe" id="hJp-04-gXF"/>
+                        <outlet property="streetAddressLabel" destination="UFJ-4K-Ux2" id="dkD-31-pKZ"/>
+                        <outlet property="streetAddressTextField" destination="1Ne-u4-wF5" id="9eG-He-C0w"/>
                         <outlet property="subMenuBlank" destination="hvq-VQ-W4j" id="s4u-gq-kOd"/>
                         <outlet property="subMenuContractor" destination="FAX-5A-DYs" id="dtU-mx-tc5"/>
                         <outlet property="subMenuContractor1001Button" destination="7bv-gp-bOt" id="l1E-B4-Yvk"/>
@@ -753,6 +768,8 @@
                         <outlet property="subMenuVendorOrkinButton" destination="wo9-z4-qF3" id="TUS-h1-XkN"/>
                         <outlet property="topMenubar" destination="Wsy-Vc-yzH" id="JK8-Rl-DQx"/>
                         <outlet property="vendorTopButton" destination="O55-wS-VRR" id="rgi-5w-4u4"/>
+                        <outlet property="zipCodeLabel" destination="vE3-Gj-FY8" id="DES-Cb-eb0"/>
+                        <outlet property="zipCodeTextField" destination="6nF-0n-I4j" id="jNr-wv-OYY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

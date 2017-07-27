@@ -62,18 +62,37 @@ class ViewController: UIViewController {
     @IBOutlet weak var subMenuVendorFedexButton: UIButton!
     @IBOutlet weak var subMenuVendorNWElectricalButton: UIButton!
     
-    
+    //TextField outlets
     @IBOutlet weak var dobTextField: CustomTextField!
-    
     @IBOutlet weak var dateVisitField: CustomTextField!
-    
     @IBOutlet weak var projectTextField: CustomTextField!
+    @IBOutlet weak var firstNameTextField: CustomTextField!
+    @IBOutlet weak var lastNameTextField: CustomTextField!
+    @IBOutlet weak var companyTextField: CustomTextField!
+    @IBOutlet weak var streetAddressTextField: CustomTextField!
+    @IBOutlet weak var cityTextField: CustomTextField!
+    @IBOutlet weak var stateTextField: CustomTextField!
+    @IBOutlet weak var zipCodeTextField: CustomTextField!
     
+    //Label outlets
+    @IBOutlet weak var dobLabel: CustomLabel!
+    @IBOutlet weak var dateVisitLabel: CustomLabel!
+    @IBOutlet weak var projectLabel: CustomLabel!
+    @IBOutlet weak var firstNameLabel: CustomLabel!
+    @IBOutlet weak var lastNameLabel: CustomLabel!
+    @IBOutlet weak var companyLabel: CustomLabel!
+    @IBOutlet weak var streetAddressLabel: CustomLabel!
+    @IBOutlet weak var cityLabel: CustomLabel!
+    @IBOutlet weak var stateLabel: CustomLabel!
+    @IBOutlet weak var zipCodeLabel: CustomLabel!
+    
+ 
     
     
     //Set properties
     var entrantSelected: EntrantType = .none
-    
+    var trackOfHighlightedTextField: [CustomTextField] = []
+    var trackOfHighlightedLabel: [CustomLabel] = []
     
     // Create a view that will be the Top meny background colour
     private lazy var backgroundTopMenuView: UIView = {
@@ -136,7 +155,6 @@ class ViewController: UIViewController {
         pinBackground(backgroundSubMenuEmployeeView, to: subMenuEmployee)
         pinBackground(backgroundSubMenuContractorView, to: subMenuContractor)
         pinBackground(backgroundSubMenuVendorView, to: subMenuVendor)
-        dobTextField.isEnabled = true
         
         // ---------------------------------------------------------
         // ---- Checking creation of a user ticket and checking errors ----
@@ -361,58 +379,22 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func subMenuGuestButtons(_ sender: UIButton) {
+    @IBAction func subMenuButtonPressed(_ sender: UIButton) {
         
         //reset submenu to inactive style
         subMenuReset()
+        fieldsAndLabelReset()
         
         //set the button clicked to active style
         sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
         sender.setTitleColor(UIColor.white, for: .normal)
         
-        //Set current type of entrant selected
+        //Set current type of entrant selected inclusing active fields
         senderToCurrentEntrantState(buttonPressed: sender)
         print(entrantSelected)
     }
     
-    @IBAction func subMenuEmployeeButtons(_ sender: UIButton) {
-        //reset submenu to inactive style
-        subMenuReset()
-        
-        //set the button clicked to active style
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-        sender.setTitleColor(UIColor.white, for: .normal)
-        
-        //Set current type of entrant selected
-        senderToCurrentEntrantState(buttonPressed: sender)
-        print(entrantSelected)
-    }
-    
-    @IBAction func subMenuContractorButtons(_ sender: UIButton) {
-        //reset submenu to inactive style
-        subMenuReset()
-        
-        //set the button clicked to active style
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-        sender.setTitleColor(UIColor.white, for: .normal)
-        
-        //Set current type of entrant selected
-        senderToCurrentEntrantState(buttonPressed: sender)
-        print(entrantSelected)
-    }
-    
-    @IBAction func subMenuVendorButtons(_ sender: UIButton) {
-        //reset submenu to inactive style
-        subMenuReset()
-        
-        //set the button clicked to active style
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-        sender.setTitleColor(UIColor.white, for: .normal)
-        
-        //Set current type of entrant selected
-        senderToCurrentEntrantState(buttonPressed: sender)
-        print(entrantSelected)
-    }
+   
     
     
     //Set all sub menu button lables back to inactive state
@@ -458,33 +440,73 @@ class ViewController: UIViewController {
         
     }
     
+    func setActiveInterface(textField: [CustomTextField], label: [CustomLabel]) {
+        for eachButton in textField {
+            eachButton.isEnabled = true
+        }
+        
+        for eachLabel in label {
+            eachLabel.textColor = UIColor.black
+        }
+        
+        trackOfHighlightedTextField = textField
+        trackOfHighlightedLabel = label
+        print(trackOfHighlightedTextField)
+    }
     
+    func fieldsAndLabelReset() {
+        
+        if projectTextField.text != "" {
+            projectTextField.text = ""
+            projectTextField.placeholder = "########"
+        }
+        
+        if trackOfHighlightedTextField != [] {
+            for eachButton in trackOfHighlightedTextField {
+                eachButton.isEnabled = false
+            }
+        }
+        
+        if trackOfHighlightedLabel != [] {
+            for eachLabel in trackOfHighlightedLabel {
+                eachLabel.textColor = UIColor.lightGray
+            }
+        }
+    }
     
+    func projectFieldActivate(project: String) {
+        projectLabel.textColor = UIColor.black
+        projectTextField.isEnabled = true
+        projectTextField.text = project
+        trackOfHighlightedTextField.append(projectTextField)
+        trackOfHighlightedLabel.append(projectLabel)
+    }
     
     func senderToCurrentEntrantState(buttonPressed: UIButton) {
         switch buttonPressed {
-        case subMenuGuestChild: entrantSelected = .freechildguest
+        case subMenuGuestChild: entrantSelected = .freechildguest; setActiveInterface(textField: [dobTextField], label: [dobLabel])
         case subMenuGuestAdult: entrantSelected = .classicguest
-        case subMenuGuestSenior: entrantSelected = .seniorguest
+        case subMenuGuestSenior: entrantSelected = .seniorguest; setActiveInterface(textField: [dobTextField, firstNameTextField, lastNameTextField], label: [dobLabel, firstNameLabel, lastNameLabel])
         case subMenuGuestVIP: entrantSelected = .vipguest
-        case subMenuGuestSeasonPass: entrantSelected = .seasonguest
-        case subMenuEmployeeFoodButton: entrantSelected = .foodservices
-        case subMenuEmployeeRideButton: entrantSelected = .rideservices
-        case subMenuEmployeeMaintenanceButton: entrantSelected = .maintenance
-        case subMenuEmployeeManagerButton: entrantSelected = .manager
-        case subMenuContractor1001Button: entrantSelected = .contract1001
-        case subMenuContractor1002Button: entrantSelected = .contract1002
-        case subMenuContractor1003Button: entrantSelected = .contract1003
-        case subMenuContractor2001Button: entrantSelected = .contract2001
-        case subMenuContractor2002Button: entrantSelected = .contract2002
-        case subMenuVendorAcmeButton: entrantSelected = .vendoracme
-        case subMenuVendorOrkinButton: entrantSelected = .vendororkin
-        case subMenuVendorFedexButton: entrantSelected = .vendorfedex
-        case subMenuVendorNWElectricalButton: entrantSelected = .vendorneweletrical
+        case subMenuGuestSeasonPass: entrantSelected = .seasonguest; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel])
+        case subMenuEmployeeFoodButton: entrantSelected = .foodservices; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel])
+        case subMenuEmployeeRideButton: entrantSelected = .rideservices; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel])
+        case subMenuEmployeeMaintenanceButton: entrantSelected = .maintenance; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel])
+        case subMenuEmployeeManagerButton: entrantSelected = .manager; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel])
+        case subMenuContractor1001Button: entrantSelected = .contract1001; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel]); projectFieldActivate(project: "1001")
+        case subMenuContractor1002Button: entrantSelected = .contract1002; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel]); projectFieldActivate(project: "1002")
+        case subMenuContractor1003Button: entrantSelected = .contract1003; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel]); projectFieldActivate(project: "1003")
+        case subMenuContractor2001Button: entrantSelected = .contract2001; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel]); projectFieldActivate(project: "2001")
+        case subMenuContractor2002Button: entrantSelected = .contract2002; setActiveInterface(textField: [firstNameTextField, lastNameTextField, streetAddressTextField, cityTextField, stateTextField, zipCodeTextField], label: [firstNameLabel, lastNameLabel, streetAddressLabel, cityLabel, stateLabel, zipCodeLabel]); projectFieldActivate(project: "2002")
+        case subMenuVendorAcmeButton: entrantSelected = .vendoracme; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
+        case subMenuVendorOrkinButton: entrantSelected = .vendororkin; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
+        case subMenuVendorFedexButton: entrantSelected = .vendorfedex; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
+        case subMenuVendorNWElectricalButton: entrantSelected = .vendorneweletrical; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
         default: entrantSelected = .none
         }
     }
     
+
 
 }
 
