@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -320,7 +321,10 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                        <connections>
+                                                            <action selector="dobDatePicker:" destination="BYZ-38-t0r" eventType="touchDown" id="TBV-ZW-YZ0"/>
+                                                        </connections>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -343,7 +347,10 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                        <connections>
+                                                            <action selector="dateOfVisitPicker:" destination="BYZ-38-t0r" eventType="touchDown" id="R56-8d-lhX"/>
+                                                        </connections>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of Visit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAB-sE-ucW" customClass="CustomLabel" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="103" height="23"/>
@@ -371,7 +378,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcm-QD-H6S" customClass="CustomLabel" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="76" height="23"/>
@@ -391,34 +398,40 @@
                                             </view>
                                         </subviews>
                                     </stackView>
+                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="POP-6n-7LK">
+                                        <rect key="frame" x="257" y="95" width="320" height="168.5"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="523460031.189219">
+                                            <!--2017-08-03 13:33:51 +0000-->
+                                        </date>
+                                    </datePicker>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBM-E9-xxR" userLabel="line">
-                                        <rect key="frame" x="0.0" y="129" width="834" height="2"/>
+                                        <rect key="frame" x="0.0" y="263.5" width="834" height="2"/>
                                         <color key="backgroundColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="0.1677547089041096" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="aUB-ZX-wKl"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="q2v-Sk-NQ4" userLabel="first and last name">
-                                        <rect key="frame" x="30" y="157.5" width="774" height="110"/>
+                                        <rect key="frame" x="30" y="265.5" width="774" height="110"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5IO-Hd-qhf">
                                                 <rect key="frame" x="0.0" y="0.0" width="370" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.55000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="BHT-j6-8Zn" customClass="CustomLabel" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1V-0S-KiT" customClass="CustomTextField" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="46" width="370" height="64"/>
+                                                        <rect key="frame" x="0.0" y="46.5" width="370" height="63.5"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Y1V-0S-KiT" secondAttribute="height" multiplier="337:58" id="rSf-Hc-G7V"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -434,20 +447,20 @@
                                                 <rect key="frame" x="404" y="0.0" width="370" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOC-86-JDq" customClass="CustomLabel" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="38"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rOO-ek-Oa1" customClass="CustomTextField" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="46" width="370" height="64"/>
+                                                        <rect key="frame" x="0.0" y="46.5" width="370" height="63.5"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rOO-ek-Oa1" secondAttribute="height" multiplier="337:58" id="6is-LU-4O2"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -462,14 +475,14 @@
                                         </subviews>
                                     </stackView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfX-10-LbW" userLabel="line">
-                                        <rect key="frame" x="0.0" y="294" width="834" height="2"/>
+                                        <rect key="frame" x="0.0" y="375.5" width="834" height="2"/>
                                         <color key="backgroundColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="0.16775470889999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="Ds2-ga-54l"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lQV-5c-P4p" userLabel="Company">
-                                        <rect key="frame" x="30" y="323" width="774" height="108.5"/>
+                                        <rect key="frame" x="30" y="377.5" width="774" height="108.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ict-yZ-93H">
                                                 <rect key="frame" x="0.0" y="0.0" width="774" height="108.5"/>
@@ -488,7 +501,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -503,7 +516,7 @@
                                         </subviews>
                                     </stackView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTL-oE-096" userLabel="line">
-                                        <rect key="frame" x="0.0" y="459" width="834" height="2"/>
+                                        <rect key="frame" x="0.0" y="486" width="834" height="2"/>
                                         <color key="backgroundColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="0.16775470889999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="0Rl-JM-9fR"/>
@@ -529,7 +542,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -563,7 +576,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -591,7 +604,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -619,7 +632,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -642,6 +655,7 @@
                                     <constraint firstItem="0pj-Gc-hqw" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" constant="30" id="CEp-2D-ucz"/>
                                     <constraint firstAttribute="trailing" secondItem="kNY-qG-WGI" secondAttribute="trailing" constant="30" id="Dc2-2n-LVu"/>
                                     <constraint firstItem="rBM-E9-xxR" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" id="GGJ-fo-Pgw"/>
+                                    <constraint firstItem="POP-6n-7LK" firstAttribute="centerX" secondItem="QNf-xt-NST" secondAttribute="centerX" id="Mip-de-Mem"/>
                                     <constraint firstItem="nfX-10-LbW" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" id="Y8k-5U-16t"/>
                                     <constraint firstAttribute="trailing" secondItem="q2v-Sk-NQ4" secondAttribute="trailing" constant="30" id="YXI-qX-gJZ"/>
                                     <constraint firstAttribute="trailing" secondItem="lQV-5c-P4p" secondAttribute="trailing" constant="30" id="b5W-P2-uVE"/>
@@ -649,6 +663,7 @@
                                     <constraint firstItem="lQV-5c-P4p" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" constant="30" id="jyI-sc-4c5"/>
                                     <constraint firstItem="kNY-qG-WGI" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" constant="30" id="lCG-KF-FFh"/>
                                     <constraint firstAttribute="trailing" secondItem="bTg-mO-d7K" secondAttribute="trailing" constant="30" id="mg9-S7-TDM"/>
+                                    <constraint firstItem="POP-6n-7LK" firstAttribute="top" secondItem="kNY-qG-WGI" secondAttribute="bottom" id="sb4-sQ-32E"/>
                                     <constraint firstAttribute="trailing" secondItem="0pj-Gc-hqw" secondAttribute="trailing" constant="30" id="vdG-uc-mXO"/>
                                     <constraint firstAttribute="trailing" secondItem="rBM-E9-xxR" secondAttribute="trailing" id="zcl-dR-ivb"/>
                                 </constraints>
@@ -696,8 +711,8 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="fHe-a9-Htc" secondAttribute="bottom" constant="200" id="AFV-iS-w7N"/>
                             <constraint firstAttribute="trailing" secondItem="fHe-a9-Htc" secondAttribute="trailing" id="CnI-Ew-BCe"/>
                             <constraint firstItem="Pxb-nx-dqS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DDe-bh-G8Q"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="zzW-yg-iBx" secondAttribute="bottom" constant="115" id="G7k-qk-Okx"/>
                             <constraint firstItem="Pxb-nx-dqS" firstAttribute="top" secondItem="Wsy-Vc-yzH" secondAttribute="bottom" id="HLS-bQ-jzv"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zzW-yg-iBx" secondAttribute="bottom" constant="115" id="Ifu-gS-nmd"/>
                             <constraint firstItem="hvq-VQ-W4j" firstAttribute="top" secondItem="Wsy-Vc-yzH" secondAttribute="bottom" id="OeV-u6-tEI"/>
                             <constraint firstItem="WLz-Bb-33p" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ql9-G6-0RY"/>
                             <constraint firstAttribute="trailing" secondItem="WLz-Bb-33p" secondAttribute="trailing" id="R5N-yJ-Rz2"/>
@@ -735,6 +750,7 @@
                         <outlet property="firstNameLabel" destination="BHT-j6-8Zn" id="hfJ-gb-dr5"/>
                         <outlet property="firstNameTextField" destination="Y1V-0S-KiT" id="2jd-JO-eLN"/>
                         <outlet property="guestTopButton" destination="waA-dI-mY5" id="RD5-a7-yoR"/>
+                        <outlet property="keyboardHeightLayoutConstraint" destination="TDL-l3-FdA" id="0xR-J4-fGg"/>
                         <outlet property="lastNameLabel" destination="TOC-86-JDq" id="6da-cZ-0Zd"/>
                         <outlet property="lastNameTextField" destination="rOO-ek-Oa1" id="phq-iW-Gki"/>
                         <outlet property="projectLabel" destination="mcm-QD-H6S" id="kCw-sK-3cB"/>

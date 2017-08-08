@@ -20,8 +20,11 @@ public extension UIView {
     }
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
    
+    //Constraint for keyboard
+    @IBOutlet var keyboardHeightLayoutConstraint: NSLayoutConstraint?
+    
     //Menu StackView Outlets
     @IBOutlet weak var topMenubar: UIStackView!
     @IBOutlet weak var subMenuBlank: UIStackView!
@@ -94,6 +97,8 @@ class ViewController: UIViewController {
     var trackOfHighlightedTextField: [CustomTextField] = []
     var trackOfHighlightedLabel: [CustomLabel] = []
     
+    
+    
     // Create a view that will be the Top meny background colour
     private lazy var backgroundTopMenuView: UIView = {
         let view = UIView()
@@ -147,6 +152,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Obervers for pushing up fields when keyboard is displayed
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard")))
+        
+        // delegate text fields so can set keyboard to close when return clicked
+        firstNameTextField.delegate = self
+        dobTextField.delegate = self
+        dateVisitField.delegate = self
+        projectTextField.delegate = self
+        lastNameTextField.delegate = self
+        companyTextField.delegate = self
+        streetAddressTextField.delegate = self
+        cityTextField.delegate = self
+        stateTextField.delegate = self
+        zipCodeTextField.delegate = self
         
         // Setting background coloyrs to meu bars
         pinBackground(backgroundTopMenuView, to: topMenubar)
@@ -324,6 +347,30 @@ class ViewController: UIViewController {
             fatalError("\(error)")
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+                self.keyboardHeightLayoutConstraint?.constant = 260.0
+            } else {
+                self.keyboardHeightLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
+            }
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -394,7 +441,46 @@ class ViewController: UIViewController {
         print(entrantSelected)
     }
     
-   
+    
+    // Date picker section - some DRY going on hear though not sure how to condense
+    
+            //Date picker for dob text field
+            @IBAction func dobDatePicker(_ sender: CustomTextField) {
+                let datePickerView = UIDatePicker()
+                datePickerView.datePickerMode = .date
+                sender.inputView = datePickerView
+                datePickerView.addTarget(self, action: #selector(handleDobDatePicker(sender:)), for: .valueChanged)
+            }
+           // Handler for dob date picker
+            func handleDobDatePicker(sender: UIDatePicker) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM / dd / YYYY"
+                dobTextField.text = dateFormatter.string(from: sender.date)
+                
+            }
+            
+            //Date picker for visit text field
+            @IBAction func dateOfVisitPicker(_ sender: CustomTextField) {
+                //Enter todays date
+                let todaysDate = Date()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM / dd / YYYY"
+                dateVisitField.text = dateFormatter.string(from: todaysDate)
+                
+                let datePickerView = UIDatePicker()
+                datePickerView.datePickerMode = .date
+                sender.inputView = datePickerView
+                datePickerView.addTarget(self, action: #selector(handleVisitDatePicker(sender:)), for: .valueChanged)
+            }
+    
+            // Handler for date of visit date picker
+            func handleVisitDatePicker(sender: UIDatePicker) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM / dd / YYYY"
+                dateVisitField.text = dateFormatter.string(from: sender.date)
+                
+            }
+    
     
     
     //Set all sub menu button lables back to inactive state
@@ -454,6 +540,8 @@ class ViewController: UIViewController {
         print(trackOfHighlightedTextField)
     }
     
+  
+    
     func fieldsAndLabelReset() {
         
         if projectTextField.text != "" {
@@ -506,7 +594,27 @@ class ViewController: UIViewController {
         }
     }
     
-
+    // Used when user touches outside textfield to close keyboard
+    func dismissKeyboard() {
+        firstNameTextField.resignFirstResponder()
+        dobTextField.resignFirstResponder()
+        dateVisitField.resignFirstResponder()
+        projectTextField.resignFirstResponder()
+        lastNameTextField.resignFirstResponder()
+        companyTextField.resignFirstResponder()
+        streetAddressTextField.resignFirstResponder()
+        cityTextField.resignFirstResponder()
+        stateTextField.resignFirstResponder()
+        zipCodeTextField.resignFirstResponder()
+    }
+    
+    // To close keyboard when user presses return on keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
 
 }
 
