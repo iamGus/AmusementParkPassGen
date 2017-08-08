@@ -78,14 +78,14 @@ class People: PeopleType {
         }
         // check in right string format
         let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "dd/mm/yyyy"
+        dateFormatterGet.dateFormat = "MM / dd / YYYY"
         //if not correctformat throw error
         guard (dateFormatterGet.date(from: date) != nil) else {
             throw InvalidAgeDataError.invalidAgeData
         }
         
         // Convert from string to date components
-        let dateArr = date.components(separatedBy: "/")
+        let dateArr = date.components(separatedBy: " / ")
         var day = 0
         var month = 0
         var year = 0

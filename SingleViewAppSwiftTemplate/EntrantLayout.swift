@@ -17,10 +17,10 @@ protocol PeopleType {
     func swipe<T: Swipe>(area: T) -> (bool: Bool, description: String)
 }
 
-protocol ChildType {
-    var age: Int { get }
-    init(age: Int)
-}
+//protocol ChildType {
+//    var age: Int { get }
+//    init(age: Int)
+//}
 
 protocol EmployeeType {
     var nameAddress: NameAddress { get }

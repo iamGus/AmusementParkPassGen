@@ -96,6 +96,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var entrantSelected: EntrantType = .none
     var trackOfHighlightedTextField: [CustomTextField] = []
     var trackOfHighlightedLabel: [CustomLabel] = []
+ //   var entrantData: People? //NOTE IS NIL OK?
     
     
     
@@ -179,10 +180,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         pinBackground(backgroundSubMenuContractorView, to: subMenuContractor)
         pinBackground(backgroundSubMenuVendorView, to: subMenuVendor)
         
-        // ---------------------------------------------------------
-        // ---- Checking creation of a user ticket and checking errors ----
-        // ---- Uncomment instances below to check error results ---
-        // ---------------------------------------------------------
+
         
         do{
             // ---- Classic Guest with no errors
@@ -352,6 +350,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self)
     }
     
+    //Keyboard popup including adding constraint to view
     @objc func keyboardNotification(notification: NSNotification) {
         if let userInfo = notification.userInfo {
             let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
@@ -481,7 +480,106 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
             }
     
+    @IBAction func generatePass(_ sender: UIButton) {
+        
+        
+        do{
+            // ---- Classic Guest with no errors
+            //let classicGuest = try ClassicGuest()
+            //print(classicGuest)
+            
+            // ---- Child with missing birthday ----
+            //let child = try Child(dateOfBirth: nil)
+            
+            //---- Child with wrong birthday format ----
+            //let child = try Child(dateOfBirth: "07/October/2015")
+            
+            // ---- Child older than five, bring back too old message ----
+            //let child = try Child(dateOfBirth: "04/03/2011")
+            
+            // ---- Child 3 years old, ticket created, no error ----
+            //let child = try Child(dateOfBirth: "04/03/2014")
+            //print(child.age)
+            
+            // ---- Food Services employee with no data in First name field.
+            // ---- Will inform user no data in First Name field
+            //let foodservices = try FoodServices(NameAddress(firstName: nil, lastName: "Peterson", streetAddress: "High Street", city: "Bath", state: "England", zipCode: "BA8 7TF", entrantType: .foodservices))
+            
+            // ---- Manager with "" in Street Address field
+            // ---- Will inform user no data in Street Address field
+            //let manager = try Manager(NameAddress(firstName: "Terry", lastName: "Armstrong", streetAddress: "", city: "Glasgow", state: "Scotland", zipCode: "GL3 9UR", entrantType: .manager))
+            
+            // ---- Ride Services with complete correct data, instance created
+            //let rideServices = try RideServices(NameAddress(firstName: "John", lastName: "Potter", streetAddress: "76 Peach Street", city: "Oxford", state: "Oxfordshire", zipCode: "JY8 6FR", entrantType: .rideservices))
+            //print(rideServices.nameAddress.fullName)
+            
+            switch entrantSelected {
+            case .freechildguest: let entrantData = try Child(dateOfBirth: "\(dobTextField.text!)")
+            case .classicguest: let entrantData = ClassicGuest()
+            case .seniorguest: let entrantData = try SeniorGuest(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .seniorguest, dateOfBirth: dobTextField.text!)
+            case .vipguest: let entrantData = try VIPGuest()
+            case .seasonguest: let entrantData = try SeasonGuest(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .seasonguest))
+            case .foodservices: let entrantData = try FoodServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .foodservices))
+            case .rideservices: let entrantData = try RideServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .rideservices))
+            case .maintenance: let entrantData = try Maintenance(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .maintenance))
+            case .manager: let entrantData = try Manager(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .manager))
+            case .contract1001: let entrantData = try ContractEmployee1001(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1001))
+            case .contract1002: let entrantData = try ContractEmployee1002(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1002))
+            case .contract1003: let entrantData = try ContractEmployee1003(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1003))
+            case .contract2001: let entrantData = try ContractEmployee2001(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2001))
+            case .contract2002: let entrantData = try ContractEmployee2002(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2002))
+            case .vendoracme: let entrantData = try VendorAcme(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendoracme, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendororkin: let entrantData = try VendorOrkin(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendororkin, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendorfedex: let entrantData = try VendorFedex(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorfedex, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendorneweletrical: let entrantData = try VendorNWElectrical(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorneweletrical, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            default: break // NOTE throw a no user selected error message
+                
+            }
+            
+        } catch InvalidNameAddressError.invalidDetails(errorDetails: let dataField, let user){
+            showAlert(title: "Error missing data", message: "The \(dataField) field has no data. Cannot create ticket")
+            print("The \(dataField) field has no data for \(user.rawValue). Cannot create ticket for \(user.rawValue).")
+        } catch InvalidAgeDataError.ageNotInAllowedRange(currentAge: let currentAge) {
+            showAlert(title: "Cannot create ticket", message: "Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket.")
+            print("Error: Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket. Cannot create ticket.")
+        } catch InvalidAgeDataError.missingBirthdayData {
+            showAlert(title: "Cannot create ticket", message: "You have not provided a date")
+            print("Error: You have not provided a date")
+        } catch InvalidAgeDataError.invalidAgeData {
+            showAlert(title: "Cannot create ticket", message: "Invalid date format, date must be in the format of MM / DD / YYYY")
+            print("Error: invalid date format, must be in the format of MM / DD / YYYY")
+        } catch InvalidNameAddressError.invalidCompanyName {
+            showAlert(title: "Error missing data, message: "The company name field has no data. Cannot create ticket.")
+        } catch let error {
+            fatalError("\(error)")
+        }
+        
+    }
     
+    
+    @IBAction func populateData(_ sender: UIButton) {
+        
+        switch entrantSelected {
+        case .freechildguest: dobTextField.text = "08 / 27 / 2016"
+        case .classicguest, .vipguest: break
+        case .seniorguest: dobTextField.text = "12 / 14 / 1946"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"
+        case .seasonguest, .foodservices, .rideservices, .maintenance, .manager, .contract1001, .contract1002, .contract1003, .contract2001, .contract2002: firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; streetAddressTextField.text = "12 Upper Way"; cityTextField.text = "Inverness"; stateTextField.text = "Inverness-shire"; zipCodeTextField.text = "IV4 8HE"
+        case .vendoracme, .vendororkin, .vendorfedex, .vendorneweletrical: dobTextField.text = "12 / 14 / 1979"; dateVisitField.text = "08 / 08 / 2017"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; companyTextField.text = entrantSelected.rawValue
+        default: break //NOTE no user selected error message
+        }
+        
+    }
+    
+    func showAlert(title: String, message: String, style: UIAlertControllerStyle = .alert) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+        
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+ 
     
     //Set all sub menu button lables back to inactive state
     func subMenuReset() {
@@ -526,36 +624,40 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    //When called to set given textfield and lables to active state
     func setActiveInterface(textField: [CustomTextField], label: [CustomLabel]) {
-        for eachButton in textField {
-            eachButton.isEnabled = true
+        for eachTextField in textField {
+            eachTextField.isEnabled = true
         }
         
         for eachLabel in label {
             eachLabel.textColor = UIColor.black
         }
         
+        //Record which fields and lables have been activated. So can be used in fieldsAndLabelReset()
         trackOfHighlightedTextField = textField
         trackOfHighlightedLabel = label
-        print(trackOfHighlightedTextField)
     }
     
   
-    
+    //When a user clicks onto a differant entrant type to reset text field to blank and disabled, set lables to disabled.
     func fieldsAndLabelReset() {
         
+        //If project field has data
         if projectTextField.text != "" {
             projectTextField.text = ""
             projectTextField.placeholder = "########"
         }
         
-        if trackOfHighlightedTextField != [] {
-            for eachButton in trackOfHighlightedTextField {
-                eachButton.isEnabled = false
+        if trackOfHighlightedTextField != [] { // If there are active text fields
+            for eachTextField in trackOfHighlightedTextField {
+                eachTextField.isEnabled = false
+                eachTextField.text = ""
+                
             }
         }
         
-        if trackOfHighlightedLabel != [] {
+        if trackOfHighlightedLabel != [] { //if there are active lables
             for eachLabel in trackOfHighlightedLabel {
                 eachLabel.textColor = UIColor.lightGray
             }

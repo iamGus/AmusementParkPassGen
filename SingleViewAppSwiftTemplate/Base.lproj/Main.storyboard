@@ -398,33 +398,27 @@
                                             </view>
                                         </subviews>
                                     </stackView>
-                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="POP-6n-7LK">
-                                        <rect key="frame" x="257" y="95" width="320" height="168.5"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="523460031.189219">
-                                            <!--2017-08-03 13:33:51 +0000-->
-                                        </date>
-                                    </datePicker>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBM-E9-xxR" userLabel="line">
-                                        <rect key="frame" x="0.0" y="263.5" width="834" height="2"/>
+                                        <rect key="frame" x="0.0" y="129" width="834" height="2"/>
                                         <color key="backgroundColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="0.1677547089041096" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="aUB-ZX-wKl"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="q2v-Sk-NQ4" userLabel="first and last name">
-                                        <rect key="frame" x="30" y="265.5" width="774" height="110"/>
+                                        <rect key="frame" x="30" y="157.5" width="774" height="110"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5IO-Hd-qhf">
                                                 <rect key="frame" x="0.0" y="0.0" width="370" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.55000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="BHT-j6-8Zn" customClass="CustomLabel" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="38.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="91.5" height="38"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1V-0S-KiT" customClass="CustomTextField" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="46.5" width="370" height="63.5"/>
+                                                        <rect key="frame" x="0.0" y="46" width="370" height="64"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="Y1V-0S-KiT" secondAttribute="height" multiplier="337:58" id="rSf-Hc-G7V"/>
@@ -447,13 +441,13 @@
                                                 <rect key="frame" x="404" y="0.0" width="370" height="110"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TOC-86-JDq" customClass="CustomLabel" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="38.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="38"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rOO-ek-Oa1" customClass="CustomTextField" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="46.5" width="370" height="63.5"/>
+                                                        <rect key="frame" x="0.0" y="46" width="370" height="64"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="rOO-ek-Oa1" secondAttribute="height" multiplier="337:58" id="6is-LU-4O2"/>
@@ -475,14 +469,14 @@
                                         </subviews>
                                     </stackView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfX-10-LbW" userLabel="line">
-                                        <rect key="frame" x="0.0" y="375.5" width="834" height="2"/>
+                                        <rect key="frame" x="0.0" y="294" width="834" height="2"/>
                                         <color key="backgroundColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="0.16775470889999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="Ds2-ga-54l"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lQV-5c-P4p" userLabel="Company">
-                                        <rect key="frame" x="30" y="377.5" width="774" height="108.5"/>
+                                        <rect key="frame" x="30" y="323" width="774" height="108.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ict-yZ-93H">
                                                 <rect key="frame" x="0.0" y="0.0" width="774" height="108.5"/>
@@ -516,7 +510,7 @@
                                         </subviews>
                                     </stackView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTL-oE-096" userLabel="line">
-                                        <rect key="frame" x="0.0" y="486" width="834" height="2"/>
+                                        <rect key="frame" x="0.0" y="459" width="834" height="2"/>
                                         <color key="backgroundColor" red="0.60338134629999995" green="0.52076182029999996" blue="0.6990940108" alpha="0.16775470889999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="0Rl-JM-9fR"/>
@@ -655,7 +649,6 @@
                                     <constraint firstItem="0pj-Gc-hqw" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" constant="30" id="CEp-2D-ucz"/>
                                     <constraint firstAttribute="trailing" secondItem="kNY-qG-WGI" secondAttribute="trailing" constant="30" id="Dc2-2n-LVu"/>
                                     <constraint firstItem="rBM-E9-xxR" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" id="GGJ-fo-Pgw"/>
-                                    <constraint firstItem="POP-6n-7LK" firstAttribute="centerX" secondItem="QNf-xt-NST" secondAttribute="centerX" id="Mip-de-Mem"/>
                                     <constraint firstItem="nfX-10-LbW" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" id="Y8k-5U-16t"/>
                                     <constraint firstAttribute="trailing" secondItem="q2v-Sk-NQ4" secondAttribute="trailing" constant="30" id="YXI-qX-gJZ"/>
                                     <constraint firstAttribute="trailing" secondItem="lQV-5c-P4p" secondAttribute="trailing" constant="30" id="b5W-P2-uVE"/>
@@ -663,7 +656,6 @@
                                     <constraint firstItem="lQV-5c-P4p" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" constant="30" id="jyI-sc-4c5"/>
                                     <constraint firstItem="kNY-qG-WGI" firstAttribute="leading" secondItem="QNf-xt-NST" secondAttribute="leading" constant="30" id="lCG-KF-FFh"/>
                                     <constraint firstAttribute="trailing" secondItem="bTg-mO-d7K" secondAttribute="trailing" constant="30" id="mg9-S7-TDM"/>
-                                    <constraint firstItem="POP-6n-7LK" firstAttribute="top" secondItem="kNY-qG-WGI" secondAttribute="bottom" id="sb4-sQ-32E"/>
                                     <constraint firstAttribute="trailing" secondItem="0pj-Gc-hqw" secondAttribute="trailing" constant="30" id="vdG-uc-mXO"/>
                                     <constraint firstAttribute="trailing" secondItem="rBM-E9-xxR" secondAttribute="trailing" id="zcl-dR-ivb"/>
                                 </constraints>
@@ -688,6 +680,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="generatePass:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qux-Z8-vhz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcx-YM-KsM">
                                         <rect key="frame" x="404.5" y="0.0" width="369.5" height="55"/>
@@ -699,6 +694,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="5"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="populateData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gd9-eY-Sc1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
