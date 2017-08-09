@@ -96,7 +96,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var entrantSelected: EntrantType = .none
     var trackOfHighlightedTextField: [CustomTextField] = []
     var trackOfHighlightedLabel: [CustomLabel] = []
- //   var entrantData: People? //NOTE IS NIL OK?
+    var entrantData: People? //NOTE IS NIL OK?
     
     
     
@@ -181,48 +181,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         pinBackground(backgroundSubMenuVendorView, to: subMenuVendor)
         
 
-        
-        do{
-            // ---- Classic Guest with no errors
-            //let classicGuest = try ClassicGuest()
-            //print(classicGuest)
-            
-            // ---- Child with missing birthday ----
-            //let child = try Child(dateOfBirth: nil)
-
-             //---- Child with wrong birthday format ----
-            //let child = try Child(dateOfBirth: "07/October/2015")
-            
-            // ---- Child older than five, bring back too old message ----
-            //let child = try Child(dateOfBirth: "04/03/2011")
-            
-            // ---- Child 3 years old, ticket created, no error ----
-            //let child = try Child(dateOfBirth: "04/03/2014")
-            //print(child.age)
-            
-            // ---- Food Services employee with no data in First name field.
-            // ---- Will inform user no data in First Name field
-            //let foodservices = try FoodServices(NameAddress(firstName: nil, lastName: "Peterson", streetAddress: "High Street", city: "Bath", state: "England", zipCode: "BA8 7TF", entrantType: .foodservices))
-            
-            // ---- Manager with "" in Street Address field
-            // ---- Will inform user no data in Street Address field
-            //let manager = try Manager(NameAddress(firstName: "Terry", lastName: "Armstrong", streetAddress: "", city: "Glasgow", state: "Scotland", zipCode: "GL3 9UR", entrantType: .manager))
-            
-            // ---- Ride Services with complete correct data, instance created
-            //let rideServices = try RideServices(NameAddress(firstName: "John", lastName: "Potter", streetAddress: "76 Peach Street", city: "Oxford", state: "Oxfordshire", zipCode: "JY8 6FR", entrantType: .rideservices))
-            //print(rideServices.nameAddress.fullName)
-            
-        } catch InvalidNameAddressError.invalidDetails(errorDetails: let dataField, let user){
-            print("Error: The \(dataField) field has no data for \(user.rawValue). Cannot create ticket for \(user.rawValue).")
-        } catch InvalidAgeDataError.ageNotInAllowedRange(currentAge: let currentAge) {
-            print("Error: Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket. Cannot create ticket.")
-        } catch InvalidAgeDataError.missingBirthdayData {
-            print("Error: You have not provided a date of birth")
-        } catch InvalidAgeDataError.invalidAgeData {
-            print("Error: invalid age format, must be in format dd/mm/yyyy")
-        } catch let error {
-            fatalError("\(error)")
-        }
+       
         
         // ---------------------------------
         // ----- Checking access rights ----
@@ -482,6 +441,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func generatePass(_ sender: UIButton) {
         
+      
         
         do{
             // ---- Classic Guest with no errors
@@ -514,24 +474,24 @@ class ViewController: UIViewController, UITextFieldDelegate {
             //print(rideServices.nameAddress.fullName)
             
             switch entrantSelected {
-            case .freechildguest: let entrantData = try Child(dateOfBirth: "\(dobTextField.text!)")
-            case .classicguest: let entrantData = ClassicGuest()
-            case .seniorguest: let entrantData = try SeniorGuest(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .seniorguest, dateOfBirth: dobTextField.text!)
-            case .vipguest: let entrantData = try VIPGuest()
-            case .seasonguest: let entrantData = try SeasonGuest(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .seasonguest))
-            case .foodservices: let entrantData = try FoodServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .foodservices))
-            case .rideservices: let entrantData = try RideServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .rideservices))
-            case .maintenance: let entrantData = try Maintenance(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .maintenance))
-            case .manager: let entrantData = try Manager(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .manager))
-            case .contract1001: let entrantData = try ContractEmployee1001(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1001, projectNumber: projectTextField.text)
-            case .contract1002: let entrantData = try ContractEmployee1002(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1002, projectNumber: projectTextField.text)
-            case .contract1003: let entrantData = try ContractEmployee1003(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1003, projectNumber: projectTextField.text)
-            case .contract2001: let entrantData = try ContractEmployee2001(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2001, projectNumber: projectTextField.text)
-            case .contract2002: let entrantData = try ContractEmployee2002(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2002, projectNumber: projectTextField.text)
-            case .vendoracme: let entrantData = try VendorAcme(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendoracme, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
-            case .vendororkin: let entrantData = try VendorOrkin(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendororkin, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
-            case .vendorfedex: let entrantData = try VendorFedex(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorfedex, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
-            case .vendorneweletrical: let entrantData = try VendorNWElectrical(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorneweletrical, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .freechildguest: entrantData = try Child(dateOfBirth: "\(dobTextField.text!)")
+            case .classicguest: entrantData = ClassicGuest()
+            case .seniorguest: entrantData = try SeniorGuest(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .seniorguest, dateOfBirth: dobTextField.text!)
+            case .vipguest: entrantData = try VIPGuest()
+            case .seasonguest: entrantData = try SeasonGuest(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .seasonguest))
+            case .foodservices: entrantData = try FoodServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .foodservices))
+            case .rideservices: entrantData = try RideServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .rideservices))
+            case .maintenance: entrantData = try Maintenance(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .maintenance))
+            case .manager: entrantData = try Manager(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .manager))
+            case .contract1001: entrantData = try ContractEmployee1001(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1001, projectNumber: projectTextField.text)
+            case .contract1002: entrantData = try ContractEmployee1002(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1002, projectNumber: projectTextField.text)
+            case .contract1003: entrantData = try ContractEmployee1003(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1003, projectNumber: projectTextField.text)
+            case .contract2001: entrantData = try ContractEmployee2001(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2001, projectNumber: projectTextField.text)
+            case .contract2002: entrantData = try ContractEmployee2002(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2002, projectNumber: projectTextField.text)
+            case .vendoracme: entrantData = try VendorAcme(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendoracme, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendororkin: entrantData = try VendorOrkin(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendororkin, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendorfedex: entrantData = try VendorFedex(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorfedex, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendorneweletrical: entrantData = try VendorNWElectrical(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorneweletrical, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             default: break // NOTE throw a no user selected error message
                 
             }
@@ -556,6 +516,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showAlert(title: "Error", message: "\(error)")
         }
         
+       
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dataToPassToTicketView = entrantData {
+            if let destViewController = segue.destination as? TicketViewController {
+                destViewController.dataFromForm = dataToPassToTicketView
+            }
+        } else {
+            showAlert(title: "Error", message: "No user selected") // If users clicks on generate ticket then segue tries to happen but if entrantdata is nill it means no user type has been generated and so user has not selected a entrant type. Error message then shows and segue does not happen.
+        }
     }
     
     

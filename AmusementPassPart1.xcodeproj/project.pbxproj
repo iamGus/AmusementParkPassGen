@@ -13,6 +13,8 @@
 		180F3C8D1F29D71700FBA1B2 /* Buttonex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F3C8C1F29D71700FBA1B2 /* Buttonex.swift */; };
 		1811682F1F20E723006E6520 /* EntrantContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1811682E1F20E723006E6520 /* EntrantContract.swift */; };
 		181168311F20EF81006E6520 /* EntrantVendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181168301F20EF81006E6520 /* EntrantVendor.swift */; };
+		1825A8391F3B13FB0012A0C4 /* TicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825A8381F3B13FB0012A0C4 /* TicketViewController.swift */; };
+		1825A83B1F3B5ECA0012A0C4 /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1825A83A1F3B5ECA0012A0C4 /* TicketView.swift */; };
 		1827D6BB1F0A2E4E003D12F7 /* EntrantLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1827D6BA1F0A2E4E003D12F7 /* EntrantLayout.swift */; };
 		18F985F81F275DA3001A973B /* customTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F985F71F275DA3001A973B /* customTextField.swift */; };
 		18FB43A11F28C34B0007B7CE /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FB43A01F28C34B0007B7CE /* CustomLabel.swift */; };
@@ -49,6 +51,8 @@
 		180F3C8C1F29D71700FBA1B2 /* Buttonex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buttonex.swift; sourceTree = "<group>"; };
 		1811682E1F20E723006E6520 /* EntrantContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantContract.swift; sourceTree = "<group>"; };
 		181168301F20EF81006E6520 /* EntrantVendor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantVendor.swift; sourceTree = "<group>"; };
+		1825A8381F3B13FB0012A0C4 /* TicketViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketViewController.swift; sourceTree = "<group>"; };
+		1825A83A1F3B5ECA0012A0C4 /* TicketView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 		1827D6BA1F0A2E4E003D12F7 /* EntrantLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrantLayout.swift; sourceTree = "<group>"; };
 		18F985F71F275DA3001A973B /* customTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customTextField.swift; sourceTree = "<group>"; };
 		18FB43A01F28C34B0007B7CE /* CustomLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 			children = (
 				3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */,
 				3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */,
+				1825A8381F3B13FB0012A0C4 /* TicketViewController.swift */,
 				1827D6BA1F0A2E4E003D12F7 /* EntrantLayout.swift */,
 				1804587C1F16089B008F2A96 /* EntrantSuper.swift */,
 				180458781F1607A3008F2A96 /* EntrantGuest.swift */,
@@ -130,6 +135,7 @@
 				18F985F71F275DA3001A973B /* customTextField.swift */,
 				18FB43A01F28C34B0007B7CE /* CustomLabel.swift */,
 				180F3C8C1F29D71700FBA1B2 /* Buttonex.swift */,
+				1825A83A1F3B5ECA0012A0C4 /* TicketView.swift */,
 			);
 			path = SingleViewAppSwiftTemplate;
 			sourceTree = "<group>";
@@ -287,7 +293,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				181168311F20EF81006E6520 /* EntrantVendor.swift in Sources */,
+				1825A83B1F3B5ECA0012A0C4 /* TicketView.swift in Sources */,
 				18FB43A11F28C34B0007B7CE /* CustomLabel.swift in Sources */,
+				1825A8391F3B13FB0012A0C4 /* TicketViewController.swift in Sources */,
 				1804587B1F160837008F2A96 /* EntrantEmployee.swift in Sources */,
 				18F985F81F275DA3001A973B /* customTextField.swift in Sources */,
 				180458791F1607A3008F2A96 /* EntrantGuest.swift in Sources */,
