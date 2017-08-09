@@ -523,11 +523,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             case .rideservices: let entrantData = try RideServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .rideservices))
             case .maintenance: let entrantData = try Maintenance(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .maintenance))
             case .manager: let entrantData = try Manager(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .manager))
-            case .contract1001: let entrantData = try ContractEmployee1001(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1001))
-            case .contract1002: let entrantData = try ContractEmployee1002(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1002))
-            case .contract1003: let entrantData = try ContractEmployee1003(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1003))
-            case .contract2001: let entrantData = try ContractEmployee2001(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2001))
-            case .contract2002: let entrantData = try ContractEmployee2002(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2002))
+            case .contract1001: let entrantData = try ContractEmployee1001(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1001, projectNumber: projectTextField.text)
+            case .contract1002: let entrantData = try ContractEmployee1002(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1002, projectNumber: projectTextField.text)
+            case .contract1003: let entrantData = try ContractEmployee1003(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract1003, projectNumber: projectTextField.text)
+            case .contract2001: let entrantData = try ContractEmployee2001(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2001, projectNumber: projectTextField.text)
+            case .contract2002: let entrantData = try ContractEmployee2002(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .contract2002, projectNumber: projectTextField.text)
             case .vendoracme: let entrantData = try VendorAcme(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendoracme, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             case .vendororkin: let entrantData = try VendorOrkin(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendororkin, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             case .vendorfedex: let entrantData = try VendorFedex(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorfedex, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
@@ -549,9 +549,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showAlert(title: "Cannot create ticket", message: "Invalid date format, date must be in the format of MM / DD / YYYY")
             print("Error: invalid date format, must be in the format of MM / DD / YYYY")
         } catch InvalidNameAddressError.invalidCompanyName {
-            showAlert(title: "Error missing data, message: "The company name field has no data. Cannot create ticket.")
+            showAlert(title: "Error missing data", message: "The company name field has no data. Cannot create ticket.")
+        } catch InvalidNameAddressError.invalidProjectNumber {
+            showAlert(title: "Error missing data", message: "The Project Number field has no data. Cannot create ticket.")
         } catch let error {
-            fatalError("\(error)")
+            showAlert(title: "Error", message: "\(error)")
         }
         
     }
