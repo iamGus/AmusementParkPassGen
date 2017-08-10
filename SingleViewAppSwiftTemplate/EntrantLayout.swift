@@ -50,7 +50,7 @@ enum EntrantType: String {
     case vendoracme = "Vendor Acme Pass"
     case vendororkin = "Vendor Orkin Pass"
     case vendorfedex = "Vendor Fedex Pass"
-    case vendorneweletrical = "Vendor NW Electrical Pass"
+    case vendornwelectrical = "Vendor NW Electrical Pass"
 }
 
 enum AreaAccess: String {
@@ -65,6 +65,7 @@ enum AreaAccess: String {
 enum RideAccess: String {
     case allrides = "Access All Rides"
     case skipAllLines = "Skip All Lines"
+    case none = "No Ride access Allowed"
 }
 
 enum InvalidAgeDataError: Error {

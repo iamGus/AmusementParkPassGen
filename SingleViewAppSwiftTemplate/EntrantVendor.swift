@@ -27,7 +27,7 @@ class Vendor: People {
         }
         self.dateOfVisit = try calcAge(birthDate: dateOfVisit).dob
         self.dob = try calcAge(birthDate: dateOfBirth).dob
-        self.rideAccess = []
+        self.rideAccess = [.none]
     }
 }
 
@@ -63,7 +63,7 @@ class VendorNWElectrical: Vendor {
     
     override init(firstName: String?, lastName: String?, entrantType: EntrantType, dateOfBirth: String?, company: String?, dateOfVisit: String?) throws {
         try super.init(firstName: firstName, lastName: lastName, entrantType: entrantType, dateOfBirth: dateOfBirth, company: company, dateOfVisit: dateOfVisit)
-        self.entrantType = .vendorneweletrical
+        self.entrantType = .vendornwelectrical
         self.areaAccess = [.kitchen, .amusement, .maintenance, .office , .ridecontrol]
     }
 }

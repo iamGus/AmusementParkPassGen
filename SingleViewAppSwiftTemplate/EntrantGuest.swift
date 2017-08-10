@@ -86,7 +86,7 @@ class SeniorGuest: Guest {
     init(_ nameAddress: NameAddress) {
         self.nameAddress = nameAddress
         super.init()
-        self.entrantType = .seasonguest
+        self.entrantType = .seniorguest
         self.rideAccess = [.skipAllLines, .allrides]
         self.discountAccess = DiscountAccess(food: .ten, merchendise: .ten)
     }
@@ -96,7 +96,7 @@ class SeniorGuest: Guest {
         let ageAndDob = try calcAge(birthDate: dateOfBirth)
         self.dob = ageAndDob.dob
         self.age = ageAndDob.age
-        self.entrantType = .seasonguest
+        self.entrantType = .seniorguest
         self.rideAccess = [.skipAllLines, .allrides]
         self.discountAccess = DiscountAccess(food: .ten, merchendise: .ten)
     }

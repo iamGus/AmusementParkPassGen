@@ -491,7 +491,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             case .vendoracme: entrantData = try VendorAcme(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendoracme, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             case .vendororkin: entrantData = try VendorOrkin(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendororkin, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             case .vendorfedex: entrantData = try VendorFedex(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorfedex, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
-            case .vendorneweletrical: entrantData = try VendorNWElectrical(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorneweletrical, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
+            case .vendornwelectrical: entrantData = try VendorNWElectrical(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendornwelectrical, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             default: break // NOTE throw a no user selected error message
                 
             }
@@ -538,7 +538,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case .classicguest, .vipguest: break
         case .seniorguest: dobTextField.text = "12 / 14 / 1946"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"
         case .seasonguest, .foodservices, .rideservices, .maintenance, .manager, .contract1001, .contract1002, .contract1003, .contract2001, .contract2002: firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; streetAddressTextField.text = "12 Upper Way"; cityTextField.text = "Inverness"; stateTextField.text = "Inverness-shire"; zipCodeTextField.text = "IV4 8HE"
-        case .vendoracme, .vendororkin, .vendorfedex, .vendorneweletrical: dobTextField.text = "12 / 14 / 1979"; dateVisitField.text = "08 / 08 / 2017"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; companyTextField.text = entrantSelected.rawValue
+        case .vendoracme, .vendororkin, .vendorfedex, .vendornwelectrical: dobTextField.text = "12 / 14 / 1979"; dateVisitField.text = "08 / 08 / 2017"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; companyTextField.text = entrantSelected.rawValue
         default: break //NOTE no user selected error message
         }
         
@@ -665,7 +665,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case subMenuVendorAcmeButton: entrantSelected = .vendoracme; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
         case subMenuVendorOrkinButton: entrantSelected = .vendororkin; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
         case subMenuVendorFedexButton: entrantSelected = .vendorfedex; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
-        case subMenuVendorNWElectricalButton: entrantSelected = .vendorneweletrical; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
+        case subMenuVendorNWElectricalButton: entrantSelected = .vendornwelectrical; setActiveInterface(textField: [dobTextField, dateVisitField, firstNameTextField, lastNameTextField, companyTextField], label: [dobLabel, dateVisitLabel, firstNameLabel, lastNameLabel, companyLabel])
         default: entrantSelected = .none
         }
     }

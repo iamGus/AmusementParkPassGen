@@ -14,7 +14,7 @@ class ContractEmployee: Employee {
     
     required init(_ nameAddress: NameAddress) {
         super.init(nameAddress)
-        self.rideAccess = []
+        self.rideAccess = [.none]
     }
         convenience init(firstName: String?, lastName: String?, streetAddress: String?, city: String?, state: String?, zipCode: String?, entrantType: EntrantType, projectNumber: String?) throws {
         try self.init(NameAddress(firstName: firstName, lastName: lastName, streetAddress: streetAddress, city: city, state: state, zipCode: zipCode, entrantType: entrantType))
