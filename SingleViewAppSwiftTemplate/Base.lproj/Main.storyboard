@@ -971,7 +971,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oth-Jn-Sog">
                                         <rect key="frame" x="0.0" y="0.0" width="744" height="310"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s03-S0-aQ9">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Results" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s03-S0-aQ9">
                                                 <rect key="frame" x="325.5" y="145.5" width="93" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1042,11 +1042,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="areaAccessButton" destination="pqS-pf-cqd" id="RbW-zf-cLA"/>
                         <outlet property="bullitPointOne" destination="BFO-uU-wq7" id="DM4-9U-Bkl"/>
                         <outlet property="bullitPointThree" destination="zub-pk-PQt" id="j04-SN-c9P"/>
                         <outlet property="bullitPointTwo" destination="EfL-8C-tEy" id="UxB-05-wtx"/>
+                        <outlet property="discountAccessButton" destination="MhG-pl-C8Q" id="ks4-Sm-CvV"/>
                         <outlet property="entrantTypeLabel" destination="nGv-S7-YKI" id="Nw4-hR-oZ8"/>
                         <outlet property="firstAndLastNameLabel" destination="wKz-CP-9ky" id="hXM-gt-DmA"/>
+                        <outlet property="rideAccessButton" destination="GmY-nY-cee" id="r8Z-rG-pdw"/>
                         <outlet property="testResultsLabel" destination="s03-S0-aQ9" id="cx1-Db-jpS"/>
                     </connections>
                 </viewController>

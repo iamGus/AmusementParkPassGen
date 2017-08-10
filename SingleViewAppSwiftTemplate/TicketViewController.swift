@@ -11,6 +11,13 @@ import Foundation
 
 class TicketViewController: UIViewController {
     
+    @IBOutlet weak var areaAccessButton: UIButton!
+    
+    @IBOutlet weak var rideAccessButton: UIButton!
+    
+    @IBOutlet weak var discountAccessButton: UIButton!
+    
+    
     //Label outlets
     @IBOutlet weak var firstAndLastNameLabel: UILabel!
     @IBOutlet weak var entrantTypeLabel: UILabel!
@@ -122,12 +129,16 @@ class TicketViewController: UIViewController {
     
 
     @IBAction func accessTestingButtons(_ sender: UIButton) {
-    }
-    
-    
-    
-    func testSwipe() {
-        
+        if sender == areaAccessButton {
+            testResultsLabel.textColor = UIColor.black
+            testResultsLabel.text = " \(dataFromForm.swipe(area: AreaAccess.amusement).description) \n \(dataFromForm.swipe(area: AreaAccess.kitchen).description) \n \(dataFromForm.swipe(area: AreaAccess.ridecontrol).description) \n \(dataFromForm.swipe(area: AreaAccess.maintenance).description) \n \(dataFromForm.swipe(area: AreaAccess.office).description)"
+        } else if sender == rideAccessButton {
+            testResultsLabel.textColor = UIColor.black
+            testResultsLabel.text = " \(dataFromForm.swipe(area: RideAccess.allrides).description) \n \(dataFromForm.swipe(area: RideAccess.skipAllLines).description)"
+        } else if sender == discountAccessButton {
+            testResultsLabel.textColor = UIColor.black
+            testResultsLabel.text = " \(dataFromForm.swipe(area: DiscountType.food).description) \n \(dataFromForm.swipe(area: DiscountType.merchandise).description)"
+        }
     }
     
  
