@@ -300,7 +300,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-xt-NST" userLabel="Main form body">
                                 <rect key="frame" x="0.0" y="145" width="834" height="707"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="kNY-qG-WGI" userLabel="dob and project line">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="kNY-qG-WGI" userLabel="dob and project line">
                                         <rect key="frame" x="30" y="0.0" width="774" height="95"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3s-ga-7nV">
@@ -965,14 +965,14 @@
                                     <constraint firstAttribute="height" constant="60" id="s75-q7-Mo9"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="pcX-gP-HHN">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="pcX-gP-HHN">
                                 <rect key="frame" x="45" y="672" width="744" height="310"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oth-Jn-Sog">
                                         <rect key="frame" x="0.0" y="0.0" width="744" height="310"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Results" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s03-S0-aQ9">
-                                                <rect key="frame" x="325.5" y="145.5" width="93" height="20.5"/>
+                                                <rect key="frame" x="326" y="145" width="93" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>

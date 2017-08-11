@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Extension to help pin background to stackview edges for top meny bar
+// Extension to pin background to stackview edges for top menu bar
 public extension UIView {
     public func pin(to view: UIView) {
         NSLayoutConstraint.activate([
@@ -33,7 +33,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var subMenuContractor: UIStackView!
     @IBOutlet weak var subMenuVendor: UIStackView!
     
-    //Top Menu ourlets
+    //Top Menu outlets
     @IBOutlet weak var guestTopButton: UIButton!
     @IBOutlet weak var employeeTopButton: UIButton!
     @IBOutlet weak var contractorTopButton: UIButton!
@@ -93,20 +93,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     //Set properties
-    var entrantSelected: EntrantType = .none
-    var trackOfHighlightedTextField: [CustomTextField] = []
-    var trackOfHighlightedLabel: [CustomLabel] = []
-    var entrantData: People? //NOTE IS NIL OK?
+    var entrantSelected: EntrantType = .none // Keeping track of active entrant selected
+    var trackOfHighlightedTextField: [CustomTextField] = [] // Keeping track of which textfields were last activated
+    var trackOfHighlightedLabel: [CustomLabel] = [] // Keeping track of which labels were last activated
+    var entrantData: People? //When a entrant is generated (successful instance of entrant created) data is stored here ready to be transferred to ticket view
     
     
     
-    // Create a view that will be the Top meny background colour
+    // Create a view that will be the Top menu background colour
     private lazy var backgroundTopMenuView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 139/255, green: 109/255, blue: 169/255, alpha: 1)
         return view
     }()
-    
     
     
     private lazy var backgroundSubMenuBlankView: UIView = {
@@ -140,7 +139,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }()
   
     
-    // Pinning the background to stackview at index 0 of stackview sunview array
+    // Pinning the background to stackview at index 0 of stackview subview array
     private func pinBackground(_ view: UIView, to stackView: UIStackView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         stackView.insertSubview(view, at: 0)
@@ -148,259 +147,163 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Obervers for pushing up fields when keyboard is displayed
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        // MARK: Keyboard display and remove
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+            //Observers for keyboard appearing and hiding
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardNotification(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard")))
+            //If user touches screen when keyboard shown
+            self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard)))
+            
+            
+            // delegate text fields so can set keyboard to close when return clicked
+            firstNameTextField.delegate = self
+            dobTextField.delegate = self
+            dateVisitField.delegate = self
+            projectTextField.delegate = self
+            lastNameTextField.delegate = self
+            companyTextField.delegate = self
+            streetAddressTextField.delegate = self
+            cityTextField.delegate = self
+            stateTextField.delegate = self
+            zipCodeTextField.delegate = self
         
-        // delegate text fields so can set keyboard to close when return clicked
-        firstNameTextField.delegate = self
-        dobTextField.delegate = self
-        dateVisitField.delegate = self
-        projectTextField.delegate = self
-        lastNameTextField.delegate = self
-        companyTextField.delegate = self
-        streetAddressTextField.delegate = self
-        cityTextField.delegate = self
-        stateTextField.delegate = self
-        zipCodeTextField.delegate = self
-        
-        // Setting background coloyrs to meu bars
+        // Setting background colors to menu bars
         pinBackground(backgroundTopMenuView, to: topMenubar)
         pinBackground(backgroundSubMenuGuestView, to: subMenuGuest)
         pinBackground(backgroundSubMenuBlankView, to: subMenuBlank)
         pinBackground(backgroundSubMenuEmployeeView, to: subMenuEmployee)
         pinBackground(backgroundSubMenuContractorView, to: subMenuContractor)
         pinBackground(backgroundSubMenuVendorView, to: subMenuVendor)
-        
-
        
-        
-        // ---------------------------------
-        // ----- Checking access rights ----
-        // ----- Un-comment case to test ---
-        // ---------------------------------
-        
-        do{
-        
-        // --- Classic Guest access
-        // Testing: Can access Amusement Area?, Can access Ride control? Skip Lines? Food discount?
-    /*
-        let classicGuestAccess = ClassicGuest()
-        let classicGuestAccessArea = classicGuestAccess.isUserAllowedInArea(.amusement)
-        let classicGuestAccessArea2 = classicGuestAccess.isUserAllowedInArea(.ridecontrol)
-        let classicGuestAccessRide = classicGuestAccess.isUserAllowedInRide(.skipAllLines)
-        let classicGuestAccessDiscount = classicGuestAccess.isUserAllowedDiscount(of: .food)
-        
-        print("Guest user \n \(classicGuestAccessArea.description) \n \(classicGuestAccessArea2.description) \n \(classicGuestAccessRide.description) \n \(classicGuestAccessDiscount.description) \n")
-     */
+    }
     
+
  
-        // --- VIP Guest access
-        // Testing: Can access Amusement Area?, Can access Office? Skip Lines? Food discount?
-    /*
-        let VIPGuestAccess = VIPGuest()
-        let VIPGuestAccessArea = VIPGuestAccess.isUserAllowedInArea(.amusement)
-        let VIPGuestAccessArea2 = VIPGuestAccess.isUserAllowedInArea(.office)
-        let VIPGuestAccessRide = VIPGuestAccess.isUserAllowedInRide(.skipAllLines)
-        let VIPGuestAccessDiscount = VIPGuestAccess.isUserAllowedDiscount(of: .food)
-        
-        print("VIP user \n \(VIPGuestAccessArea.description) \n \(VIPGuestAccessArea2.description) \n \(VIPGuestAccessRide.description) \n \(VIPGuestAccessDiscount.description) \n")
-            
-    */
-        
-        // --- Free Child Guest access
-        // Testing: Can access Amusement Area?, Can access Kitchen? Skip Lines? Merchandise discount?
-    /*
-        let childAccess = try Child(dateOfBirth: "21/01/2015")
-        let childAccessArea = childAccess.isUserAllowedInArea(.amusement)
-        let childAccessArea2 = childAccess.isUserAllowedInArea(.kitchen)
-        let childAccessRide = childAccess.isUserAllowedInRide(.skipAllLines)
-        let childAccessDiscount = childAccess.isUserAllowedDiscount(of: .merchandise)
-        
-        print("Child Guest user \n \(childAccessArea.description) \n \(childAccessArea2.description) \n \(childAccessRide.description) \n \(childAccessDiscount.description) \n")
-    */
-        // --- Food Service Employee access
-        // Testing: Can access Amusement Area?, Can access Kitchen? Can access Maintenance Area?, Skip all lines?, Merchandise discount?
+    //MARK: Keyboard - all related code to keyboard functions
     
-        let foodServicesAccess = try FoodServices(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .foodservices))
-        let foodServicesAccessArea = foodServicesAccess.swipe(area: AreaAccess.amusement)
-        let foodServicesAccessArea2 = foodServicesAccess.swipe(area: AreaAccess.kitchen)
-        let foodServicesAccessArea3 = foodServicesAccess.swipe(area: AreaAccess.maintenance)
-        let foodServicesAccessRide = foodServicesAccess.swipe(area: RideAccess.skipAllLines)
-        let foodServicesAccessDiscount = foodServicesAccess.swipe(area: DiscountType.merchandise)
+        // Removing keyboard observer
         
-        print("Food Services Employee user \n \(foodServicesAccessArea.description) \n \(foodServicesAccessArea2.description) \n \(foodServicesAccessArea3.description) \n \(foodServicesAccessRide.description) \n \(foodServicesAccessDiscount.description) \n")
-    
-        // --- Ride Service Employee access
-        // Testing: Can access Amusement Area?, Can access Ride Control? Can access Office Area?, Skip lines? food discount?
-    /*
-        let rideServicesAccess = try RideServices(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .rideservices))
-        let rideServicesAccessArea = rideServicesAccess.isUserAllowedInArea(.amusement)
-        let rideServicesAccessArea2 = rideServicesAccess.isUserAllowedInArea(.ridecontrol)
-        let rideServicesAccessArea3 = rideServicesAccess.isUserAllowedInArea(.office)
-        let rideServicesAccessRide = rideServicesAccess.isUserAllowedInRide(.skipAllLines)
-        let rideServicesAccessDiscount = rideServicesAccess.isUserAllowedDiscount(of: .food)
-        
-        print("Ride Services Employee user \n \(rideServicesAccessArea.description) \n \(rideServicesAccessArea2.description) \n \(rideServicesAccessArea3.description) \n \(rideServicesAccessRide.description) \n \(rideServicesAccessDiscount.description) \n")
-    */
-        // --- Maintenance Employee access
-        // Testing: Can access Amusement Area?, Can access Maintenance? Can access Office Area?, Can access Ride Control? Skip lines? Merchandise discount?
-    /*
-        let maintenanceAccess = try Maintenance(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .maintenance))
-        let maintenanceAccessArea = maintenanceAccess.isUserAllowedInArea(.amusement)
-        let maintenanceAccessArea2 = maintenanceAccess.isUserAllowedInArea(.maintenance)
-        let maintenanceAccessArea3 = maintenanceAccess.isUserAllowedInArea(.office)
-        let maintenanceAccessArea4 = maintenanceAccess.isUserAllowedInArea(.ridecontrol)
-        let maintenanceAccessRide = maintenanceAccess.isUserAllowedInRide(.skipAllLines)
-        let maintenanceAccessDiscount = maintenanceAccess.isUserAllowedDiscount(of: .merchandise)
-        
-        print("Maintenance Employee user \n \(maintenanceAccessArea.description) \n \(maintenanceAccessArea2.description) \n \(maintenanceAccessArea3.description) \n \(maintenanceAccessArea4.description) \n \(maintenanceAccessRide.description) \n \(maintenanceAccessDiscount.description) \n")
-    */
-           
-            let vendor = try VendorAcme(firstName: "Gus", lastName: "Muller", entrantType: .vendoracme, dateOfBirth: "12/05/1976", company: "Acme", dateOfVisit: "21/06/2017")
-            
-            print("dob: \(vendor.dob) address: \(vendor.nameAddress.fullName)")
-            
-            let seniorGuest = try SeniorGuest(firstName: "Angus", lastName: "Muller", entrantType: .seniorguest, dateOfBirth: "08/03/1943")
-            
-            print("\(seniorGuest.nameAddress.fullName)")
-            
-            let contract = try ContractEmployee1001(NameAddress(firstName: "Gus", lastName: "Muller", streetAddress: "Street", city: "City", state: "state", zipCode: "BS8HSG", entrantType: .contract1001))
-            
-            print(contract.rideAccess)
-            
-        // --- Manager Employee access
-        // Testing: Can access Amusement Area?, Can access Maintenance? Can access Office Area?, Can access Ride Control? Skip lines? Merchandise discount?
-    /*
-        let managerAccess = try Manager(NameAddress(firstName: "Fred", lastName: "Power", streetAddress: "Meadow Lane", city: "Glasgow", state: "Scotland", zipCode: "GL9 8YR", entrantType: .maintenance))
-        let managerAccessArea = managerAccess.isUserAllowedInArea(.amusement)
-        let managerAccessArea2 = managerAccess.isUserAllowedInArea(.maintenance)
-        let managerAccessArea3 = managerAccess.isUserAllowedInArea(.office)
-        let managerAccessArea4 = managerAccess.isUserAllowedInArea(.ridecontrol)
-        let managerAccessRide = managerAccess.isUserAllowedInRide(.skipAllLines)
-        let managerAccessDiscount = managerAccess.isUserAllowedDiscount(of: .merchandise)
-        
-        print("Manager Employee user \n \(managerAccessArea.description) \n \(managerAccessArea2.description) \n \(managerAccessArea3.description) \n \(managerAccessArea4.description) \n \(managerAccessRide.description) \n \(managerAccessDiscount.description) \n")
-    */
-        } catch InvalidNameAddressError.invalidDetails(errorDetails: let dataField, let user){
-            print("Error: The \(dataField) field has no data for \(user.rawValue). Cannot create ticket for \(user.rawValue).")
-        } catch InvalidAgeDataError.ageNotInAllowedRange(currentAge: let currentAge) {
-            print("Error: Child is too old for Child Ticket, Child is \(currentAge) and needs to be under 5 for a Child ticket. Cannot create ticket.")
-        } catch InvalidAgeDataError.missingBirthdayData {
-            print("Error: Missing data in age")
-        } catch InvalidAgeDataError.invalidAgeData {
-            print("Error: invalid age format, must be in format dd/mm/yyyy")
-        } catch InvalidNameAddressError.invalidCompanyName {
-            print("Error: Missing Company Name")
-        } catch let error {
-            fatalError("\(error)")
+        deinit {
+            NotificationCenter.default.removeObserver(self)
         }
-    }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    //Keyboard popup including adding constraint to view
-    @objc func keyboardNotification(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
-                self.keyboardHeightLayoutConstraint?.constant = 260.0
-            } else {
-                self.keyboardHeightLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
+        //Additional keyboard setup including adding constraints so main form content is pushed up when keyboard shows/hides
+        @objc func keyboardNotification(notification: NSNotification) {
+            if let userInfo = notification.userInfo {
+                let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+                let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+                let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+                let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+                let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+                if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+                    self.keyboardHeightLayoutConstraint?.constant = 260.0
+                } else {
+                    self.keyboardHeightLayoutConstraint?.constant = endFrame?.size.height ?? 0.0
+                }
+                UIView.animate(withDuration: duration,
+                               delay: TimeInterval(0),
+                               options: animationCurve,
+                               animations: { self.view.layoutIfNeeded() },
+                               completion: nil)
             }
-            UIView.animate(withDuration: duration,
-                           delay: TimeInterval(0),
-                           options: animationCurve,
-                           animations: { self.view.layoutIfNeeded() },
-                           completion: nil)
         }
-    }
+        
+        // Used when user touches outside textfield to close keyboard
+        func dismissKeyboard() {
+            firstNameTextField.resignFirstResponder()
+            dobTextField.resignFirstResponder()
+            dateVisitField.resignFirstResponder()
+            projectTextField.resignFirstResponder()
+            lastNameTextField.resignFirstResponder()
+            companyTextField.resignFirstResponder()
+            streetAddressTextField.resignFirstResponder()
+            cityTextField.resignFirstResponder()
+            stateTextField.resignFirstResponder()
+            zipCodeTextField.resignFirstResponder()
+        }
+        
+        // To close keyboard when user presses return on keyboard
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+        }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    //MARK: IBActions
     
-    @IBAction func topMenuButtons(_ sender: UIButton) {
-        let topMenuItems = [guestTopButton, employeeTopButton, contractorTopButton, vendorTopButton]
-        
-        //Set all menu items to inactive style
-        for eachButton in topMenuItems {
-            eachButton?.titleLabel?.font = UIFont(name: "system", size: 20.0)
-            eachButton?.setTitleColor(UIColor.init(red: 206/255, green: 162/255, blue: 255/255, alpha: 1), for: .normal)
+        //MARK: Top menu and Sub Menu
+    
+        //Top Menu - set button style depending which top menu button clicked and also show sub menu
+        @IBAction func topMenuButtons(_ sender: UIButton) {
+            let topMenuItems = [guestTopButton, employeeTopButton, contractorTopButton, vendorTopButton] // Create array of all top menu buttons so can iterate through them.
+            
+            //Set all menu items to inactive style, so if previous top button clicked, will be reset to inactive state
+            for eachButton in topMenuItems {
+                eachButton?.titleLabel?.font = UIFont(name: "system", size: 20.0)
+                eachButton?.setTitleColor(UIColor.init(red: 206/255, green: 162/255, blue: 255/255, alpha: 1), for: .normal)
+            }
+            
+            //set the button clicked to active style
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
+            sender.setTitleColor(UIColor.white, for: .normal)
+            
+            //show the sub menu for the button clicked and hide other sub menu
+            if sender == guestTopButton {
+                subMenuBlank.isHidden = true
+                subMenuEmployee.isHidden = true
+                subMenuGuest.isHidden = false
+                subMenuVendor.isHidden = true
+                subMenuContractor.isHidden = true
+                
+      
+            } else if sender == employeeTopButton {
+                subMenuBlank.isHidden = true
+                subMenuGuest.isHidden = true
+                subMenuContractor.isHidden = true
+                subMenuVendor.isHidden = true
+                subMenuEmployee.isHidden = false
+                
+      
+            } else if sender == contractorTopButton {
+                subMenuBlank.isHidden = true
+                subMenuGuest.isHidden = true
+                subMenuEmployee.isHidden = true
+                subMenuVendor.isHidden = true
+                subMenuContractor.isHidden = false
+                
+            } else if sender == vendorTopButton {
+                subMenuBlank.isHidden = true
+                subMenuGuest.isHidden = true
+                subMenuEmployee.isHidden = true
+                subMenuContractor.isHidden = true
+                subMenuVendor.isHidden = false
+            }
+            
         }
         
-        //set the button clicked to active style
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20.0)
-        sender.setTitleColor(UIColor.white, for: .normal)
-        
-        //show the sub menu for the button clicked and hide other sub menu
-        if sender == guestTopButton {
-            subMenuBlank.isHidden = true
-            subMenuEmployee.isHidden = true
-            subMenuGuest.isHidden = false
-            subMenuVendor.isHidden = true
-            subMenuContractor.isHidden = true
+        //Sub menu style set depending on which button clicked
+        @IBAction func subMenuButtonPressed(_ sender: UIButton) {
             
-  
-        } else if sender == employeeTopButton {
-            subMenuBlank.isHidden = true
-            subMenuGuest.isHidden = true
-            subMenuContractor.isHidden = true
-            subMenuVendor.isHidden = true
-            subMenuEmployee.isHidden = false
+            //reset submenu to inactive style
+            subMenuReset() // Set all buttons on sub menu to inactive state
+            fieldsAndLabelReset() // Set all fields and labels in form to inactive
             
-  
-        } else if sender == contractorTopButton {
-            subMenuBlank.isHidden = true
-            subMenuGuest.isHidden = true
-            subMenuEmployee.isHidden = true
-            subMenuVendor.isHidden = true
-            subMenuContractor.isHidden = false
+            //set the button clicked to active style
+            sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+            sender.setTitleColor(UIColor.white, for: .normal)
             
-        } else if sender == vendorTopButton {
-            subMenuBlank.isHidden = true
-            subMenuGuest.isHidden = true
-            subMenuEmployee.isHidden = true
-            subMenuContractor.isHidden = true
-            subMenuVendor.isHidden = false
+            //Set current type of entrant selected including make relevant fields and labels active
+            senderToCurrentEntrantState(buttonPressed: sender)
+            print(entrantSelected) // For testing
         }
-        
-    }
     
     
-    @IBAction func subMenuButtonPressed(_ sender: UIButton) {
-        
-        //reset submenu to inactive style
-        subMenuReset()
-        fieldsAndLabelReset()
-        
-        //set the button clicked to active style
-        sender.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-        sender.setTitleColor(UIColor.white, for: .normal)
-        
-        //Set current type of entrant selected inclusing active fields
-        senderToCurrentEntrantState(buttonPressed: sender)
-        print(entrantSelected)
-    }
-    
-    
-    // Date picker section - some DRY going on hear though not sure how to condense
+    // Date picker for the two date fields
     
             //Date picker for dob text field
             @IBAction func dobDatePicker(_ sender: CustomTextField) {
@@ -439,45 +342,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 
             }
     
+    // Generate Pass button - entrants data is checked to see if it conforms to needed rules
     @IBAction func generatePass(_ sender: UIButton) {
         
-      
-        
         do{
-            // ---- Classic Guest with no errors
-            //let classicGuest = try ClassicGuest()
-            //print(classicGuest)
-            
-            // ---- Child with missing birthday ----
-            //let child = try Child(dateOfBirth: nil)
-            
-            //---- Child with wrong birthday format ----
-            //let child = try Child(dateOfBirth: "07/October/2015")
-            
-            // ---- Child older than five, bring back too old message ----
-            //let child = try Child(dateOfBirth: "04/03/2011")
-            
-            // ---- Child 3 years old, ticket created, no error ----
-            //let child = try Child(dateOfBirth: "04/03/2014")
-            //print(child.age)
-            
-            // ---- Food Services employee with no data in First name field.
-            // ---- Will inform user no data in First Name field
-            //let foodservices = try FoodServices(NameAddress(firstName: nil, lastName: "Peterson", streetAddress: "High Street", city: "Bath", state: "England", zipCode: "BA8 7TF", entrantType: .foodservices))
-            
-            // ---- Manager with "" in Street Address field
-            // ---- Will inform user no data in Street Address field
-            //let manager = try Manager(NameAddress(firstName: "Terry", lastName: "Armstrong", streetAddress: "", city: "Glasgow", state: "Scotland", zipCode: "GL3 9UR", entrantType: .manager))
-            
-            // ---- Ride Services with complete correct data, instance created
-            //let rideServices = try RideServices(NameAddress(firstName: "John", lastName: "Potter", streetAddress: "76 Peach Street", city: "Oxford", state: "Oxfordshire", zipCode: "JY8 6FR", entrantType: .rideservices))
-            //print(rideServices.nameAddress.fullName)
-            
+            // Switch to the current entrant selected (done in senderToCurrentEntrantSate) and try and create instance of that entrant
             switch entrantSelected {
             case .freechildguest: entrantData = try Child(dateOfBirth: "\(dobTextField.text!)")
             case .classicguest: entrantData = ClassicGuest()
             case .seniorguest: entrantData = try SeniorGuest(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .seniorguest, dateOfBirth: dobTextField.text!)
-            case .vipguest: entrantData = try VIPGuest()
+            case .vipguest: entrantData = VIPGuest()
             case .seasonguest: entrantData = try SeasonGuest(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .seasonguest))
             case .foodservices: entrantData = try FoodServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .foodservices))
             case .rideservices: entrantData = try RideServices(NameAddress(firstName: firstNameTextField.text, lastName: lastNameTextField.text, streetAddress: streetAddressTextField.text, city: cityTextField.text, state: stateTextField.text, zipCode: zipCodeTextField.text, entrantType: .rideservices))
@@ -492,9 +366,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             case .vendororkin: entrantData = try VendorOrkin(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendororkin, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             case .vendorfedex: entrantData = try VendorFedex(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendorfedex, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
             case .vendornwelectrical: entrantData = try VendorNWElectrical(firstName: firstNameTextField.text, lastName: lastNameTextField.text, entrantType: .vendornwelectrical, dateOfBirth: dobTextField.text!, company: companyTextField.text, dateOfVisit: dateVisitField.text!)
-            default: break // NOTE throw a no user selected error message
+            default: break // No user selected error handling is dealt in prepare for segue function. See below.
                 
             }
+            
+        // Error handling for incomplete or wrong data in form
             
         } catch InvalidNameAddressError.invalidDetails(errorDetails: let dataField, let user){
             showAlert(title: "Error missing data", message: "The \(dataField) field has no data. Cannot create ticket")
@@ -516,21 +392,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
             showAlert(title: "Error", message: "\(error)")
         }
         
-       
     
     }
     
+    // Passing current entrant form data to ticket view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dataToPassToTicketView = entrantData {
             if let destViewController = segue.destination as? TicketViewController {
                 destViewController.dataFromForm = dataToPassToTicketView
             }
         } else {
-            showAlert(title: "Error", message: "No user selected") // If users clicks on generate ticket then segue tries to happen but if entrantdata is nill it means no user type has been generated and so user has not selected a entrant type. Error message then shows and segue does not happen.
+            // If users clicks on generate ticket then segue tries to happen but if entrant data is nill it means no user type has been generated and so user has not selected an entrant type. Error message then shows and segue does not happen.
+            showAlert(title: "Error", message: "No user selected")
         }
     }
     
-    
+    // Populate data button - depending on entrant selected it populates relevant fields with pre-set data.
     @IBAction func populateData(_ sender: UIButton) {
         
         switch entrantSelected {
@@ -539,11 +416,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         case .seniorguest: dobTextField.text = "12 / 14 / 1946"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"
         case .seasonguest, .foodservices, .rideservices, .maintenance, .manager, .contract1001, .contract1002, .contract1003, .contract2001, .contract2002: firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; streetAddressTextField.text = "12 Upper Way"; cityTextField.text = "Inverness"; stateTextField.text = "Inverness-shire"; zipCodeTextField.text = "IV4 8HE"
         case .vendoracme, .vendororkin, .vendorfedex, .vendornwelectrical: dobTextField.text = "12 / 14 / 1979"; dateVisitField.text = "08 / 08 / 2017"; firstNameTextField.text = "Howard"; lastNameTextField.text = "Smith"; companyTextField.text = entrantSelected.rawValue
-        default: break //NOTE no user selected error message
+        default: showAlert(title: "Error", message: "No user selected")
         }
         
     }
     
+    // Generic alert pop up function used for all error handling notifications
     func showAlert(title: String, message: String, style: UIAlertControllerStyle = .alert) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
         
@@ -555,7 +433,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
  
     
-    //Set all sub menu button lables back to inactive state
+    //Set all sub menu button labels back to inactive state
     func subMenuReset() {
         let subMenuItems = [subMenuGuestChild, subMenuGuestAdult, subMenuGuestSenior, subMenuGuestVIP, subMenuGuestSeasonPass, subMenuEmployeeFoodButton, subMenuEmployeeRideButton, subMenuEmployeeMaintenanceButton, subMenuEmployeeManagerButton, subMenuContractor1001Button, subMenuContractor1002Button, subMenuContractor1003Button, subMenuContractor2001Button, subMenuContractor2002Button, subMenuVendorAcmeButton, subMenuVendorOrkinButton, subMenuVendorFedexButton, subMenuVendorNWElectricalButton]
         
@@ -566,40 +444,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    //NOTE should be able to remove the below reset funcs
-    func subMenuGuestReset() {
-         let subMenuItems = [subMenuGuestChild, subMenuGuestAdult, subMenuGuestSenior, subMenuGuestVIP, subMenuGuestSeasonPass]
-        
-         for eachButton in subMenuItems {
-            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
-            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
-        }
-        
-    }
-    
-    
-    func subMenuEmployeeReset() {
-        let subMenuItems = [subMenuEmployeeFoodButton, subMenuEmployeeRideButton, subMenuEmployeeMaintenanceButton, subMenuEmployeeManagerButton]
-        
-        for eachButton in subMenuItems {
-            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
-            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
-        }
-        
-    }
-    
-    func subMenuContractorReset() {
-        let subMenuItems = [subMenuContractor1001Button, subMenuContractor1002Button, subMenuContractor1003Button, subMenuContractor2001Button, subMenuContractor2002Button]
-        
-        for eachButton in subMenuItems {
-            eachButton?.titleLabel?.font = UIFont(name: "system", size: 17.0)
-            eachButton?.setTitleColor(UIColor.init(red: 154/255, green: 133/255, blue: 178/255, alpha: 1), for: .normal)
-        }
-        
-    }
-    
-    //When called to set given textfield and lables to active state
+    //When called to set given textfield and labels to active state
     func setActiveInterface(textField: [CustomTextField], label: [CustomLabel]) {
+        // Go through each textfield and label given to it and set to active state / style
         for eachTextField in textField {
             eachTextField.isEnabled = true
         }
@@ -608,13 +455,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
             eachLabel.textColor = UIColor.black
         }
         
-        //Record which fields and lables have been activated. So can be used in fieldsAndLabelReset()
+        //Record which fields and labels have been activated. So can be used in fieldsAndLabelReset() to reset to inactive state
         trackOfHighlightedTextField = textField
         trackOfHighlightedLabel = label
     }
     
   
-    //When a user clicks onto a differant entrant type to reset text field to blank and disabled, set lables to disabled.
+    //When a user clicks onto a different entrant type to reset text field to blank and disabled, set labels to disabled.
     func fieldsAndLabelReset() {
         
         //If project field has data
@@ -623,7 +470,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             projectTextField.placeholder = "########"
         }
         
-        if trackOfHighlightedTextField != [] { // If there are active text fields
+        if trackOfHighlightedTextField != [] { // If there are active text fields then reset
             for eachTextField in trackOfHighlightedTextField {
                 eachTextField.isEnabled = false
                 eachTextField.text = ""
@@ -631,13 +478,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
         
-        if trackOfHighlightedLabel != [] { //if there are active lables
+        if trackOfHighlightedLabel != [] { //If there are active labels then reset
             for eachLabel in trackOfHighlightedLabel {
                 eachLabel.textColor = UIColor.lightGray
             }
         }
     }
     
+    // Set project field to active state and insert project number into field. This func called from within senderToCurrentEntrantState()
     func projectFieldActivate(project: String) {
         projectLabel.textColor = UIColor.black
         projectTextField.isEnabled = true
@@ -646,6 +494,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         trackOfHighlightedLabel.append(projectLabel)
     }
     
+    // To set textfields and labels to activate state depending on which sub menu button pressed. Called from subMenuButtonPressed IBAction
     func senderToCurrentEntrantState(buttonPressed: UIButton) {
         switch buttonPressed {
         case subMenuGuestChild: entrantSelected = .freechildguest; setActiveInterface(textField: [dobTextField], label: [dobLabel])
@@ -669,27 +518,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         default: entrantSelected = .none
         }
     }
-    
-    // Used when user touches outside textfield to close keyboard
-    func dismissKeyboard() {
-        firstNameTextField.resignFirstResponder()
-        dobTextField.resignFirstResponder()
-        dateVisitField.resignFirstResponder()
-        projectTextField.resignFirstResponder()
-        lastNameTextField.resignFirstResponder()
-        companyTextField.resignFirstResponder()
-        streetAddressTextField.resignFirstResponder()
-        cityTextField.resignFirstResponder()
-        stateTextField.resignFirstResponder()
-        zipCodeTextField.resignFirstResponder()
-    }
-    
-    // To close keyboard when user presses return on keyboard
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
     
 
 }

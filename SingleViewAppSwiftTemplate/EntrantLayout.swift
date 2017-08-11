@@ -17,16 +17,12 @@ protocol PeopleType {
     func swipe<T: Swipe>(area: T) -> (bool: Bool, description: String)
 }
 
-//protocol ChildType {
-//    var age: Int { get }
-//    init(age: Int)
-//}
-
 protocol EmployeeType {
     var nameAddress: NameAddress { get }
     init(_ nameAddress: NameAddress)
 }
 
+//The three access areas will be set to confirm to this protocol so can be used in swipe func within People class
 protocol Swipe {
     
 }
@@ -85,6 +81,7 @@ enum DiscountType {
     case merchandise
 }
 
+//Conform access area to swipe protocol, as swipe function in People class will only allow types that conform to swipe protocol
 extension AreaAccess: Swipe {}
 extension RideAccess: Swipe {}
 extension DiscountType: Swipe {}

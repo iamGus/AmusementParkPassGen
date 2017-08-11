@@ -2,8 +2,8 @@
 //  TicketViewController.swift
 //  AmusementPassPart1
 //
-//  Created by Angus Muller on 09/08/2017.
-//  Copyright © 2017 Treehouse. All rights reserved.
+//  Created by Angus Muller on 03/07/2017.
+//  Copyright © 2017 Angus Muller. All rights reserved.
 //
 
 import UIKit
@@ -11,12 +11,10 @@ import Foundation
 
 class TicketViewController: UIViewController {
     
+    //Button outlets
     @IBOutlet weak var areaAccessButton: UIButton!
-    
     @IBOutlet weak var rideAccessButton: UIButton!
-    
     @IBOutlet weak var discountAccessButton: UIButton!
-    
     
     //Label outlets
     @IBOutlet weak var firstAndLastNameLabel: UILabel!
@@ -27,37 +25,29 @@ class TicketViewController: UIViewController {
     @IBOutlet weak var testResultsLabel: UILabel!
     
     
-    var dataFromForm: People = People()
+    var dataFromForm: People = People() // Current entrant data from ViewController
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataFromForm.swipe(area: AreaAccess.amusement)
-     //   guard let var newdata = dataFromForm as! ClassicGuest
-        
-        //bullitPointOne.text = "\u{2022} This is a list item!"
-   print(dataFromForm)
-        
         setTicketDetailsUp()
-      
-      
     }
     
     //Works out what type of Entrant user is and then displays corerct data onto ticket
     func setTicketDetailsUp() {
-        entrantTypeLabel.text = dataFromForm.entrantType.rawValue // as entrantType is in People Type access this value now and add to label
+        entrantTypeLabel.text = dataFromForm.entrantType.rawValue // as entrantType is in People Type, access this value now and add to label
         
-        //Now check what subclass the entrant is so can access its properties
-        if let freeChildGuest = dataFromForm as? Child {
+        //Now check what subclass of People the entrant is so can access its properties
+        if dataFromForm is Child {
             firstAndLastNameLabel.text = "Guest Entrant"
             
-        } else if let classicGuest = dataFromForm as? ClassicGuest {
+        } else if dataFromForm is ClassicGuest {
             firstAndLastNameLabel.text = "Guest Entrant"
             
         } else if let seniorGuest = dataFromForm as? SeniorGuest {
             firstAndLastNameLabel.text = seniorGuest.nameAddress.fullName
             
-        } else if let vipGuest = dataFromForm as? VIPGuest {
+        } else if dataFromForm is VIPGuest {
             firstAndLastNameLabel.text = "Guest Entrant"
             
         } else if let seasonGuest = dataFromForm as? SeasonGuest {
@@ -102,32 +92,32 @@ class TicketViewController: UIViewController {
         } else if let vendorNWElectrical = dataFromForm as? VendorNWElectrical {
             firstAndLastNameLabel.text = vendorNWElectrical.nameAddress.fullName
             
-        } else {
-            //add error if it cannot find type
+        } else { // If Type is unknown
+            let alertController = UIAlertController(title: "Error", message: "Entrant Type is unknown", preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
         }
         
-        // Check wheather entrant can access rodes and update first bullit point on ticket
-        for rideAccessCheck in dataFromForm.rideAccess {
-            switch rideAccessCheck {
-            case .allrides: bullitPointOne.text = "\u{2022} Access All Rides"
-            default: bullitPointOne.text = "\u{2022} Access to Rides not Allowed"
+        //MARK: Bullit points
+        
+            // Check wheather entrant can access rides and update first bullit point on ticket
+            for rideAccessCheck in dataFromForm.rideAccess {
+                switch rideAccessCheck {
+                case .allrides: bullitPointOne.text = "\u{2022} Access All Rides"
+                default: bullitPointOne.text = "\u{2022} Access to Rides not Allowed"
+                }
             }
-        }
+            
+            // Display food discount on ticket
+            bullitPointTwo.text = "\u{2022} \(dataFromForm.discountAccess.food.rawValue)"
+            
+            // Display merchant discount on ticket
+            bullitPointThree.text = "\u{2022} \(dataFromForm.discountAccess.merchendise.rawValue)"
         
-        // Display food discount on ticket
-        bullitPointTwo.text = "\u{2022} \(dataFromForm.discountAccess.food.rawValue)"
-        
-        // Display merchant discount on ticket
-        bullitPointThree.text = "\u{2022} \(dataFromForm.discountAccess.merchendise.rawValue)"
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
+    // Testing buttons - check which of three buttons pressed and peform access test using swipe() function to see if entrant allowed access
     @IBAction func accessTestingButtons(_ sender: UIButton) {
         if sender == areaAccessButton {
             testResultsLabel.textColor = UIColor.black
@@ -140,8 +130,6 @@ class TicketViewController: UIViewController {
             testResultsLabel.text = " \(dataFromForm.swipe(area: DiscountType.food).description) \n \(dataFromForm.swipe(area: DiscountType.merchandise).description)"
         }
     }
-    
- 
     
 
 }

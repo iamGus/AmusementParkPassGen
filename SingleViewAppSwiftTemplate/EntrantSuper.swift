@@ -2,8 +2,8 @@
 //  EntrantSuper.swift
 //  AmusementPassPart1
 //
-//  Created by Angus Muller on 12/07/2017.
-//  Copyright © 2017 Treehouse. All rights reserved.
+//  Created by Angus Muller on 03/07/2017.
+//  Copyright © 2017 Angus Muller. All rights reserved.
 //
 
 import Foundation
@@ -63,7 +63,7 @@ class People: PeopleType {
             return (false, "\(discountAccess.merchendise.rawValue)")
         }
         
-        //In case none of above swipe types have invlaid input message but should never be called as protocol only allows Ride, Area to doscount in function parameter
+        //In case none of above swipe types show invlaid input message but should never be called as protocol only allows Ride, Area or discount in function
         return (false, "ALERT: Invalid input")
         
     }
